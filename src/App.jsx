@@ -4,7 +4,7 @@ import { Experience } from './components/Experience'
 function App() {
   return (
     <main style={{ width: '100vw', height: '100vh' }}>
-      {/* 3D Entry Point */}
+      {/* Immersive 3D Experience Entry Point */}
       <Experience />
     </main>
   )

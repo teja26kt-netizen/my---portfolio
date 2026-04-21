@@ -1,58 +1,86 @@
 import React, { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
-import { MeshDistortMaterial, MeshWobbleMaterial, Float } from '@react-three/drei'
+import { MeshDistortMaterial, Float, Box } from '@react-three/drei'
 import * as THREE from 'three'
 
-export const HeroSection = (props) => {
-  const group = useRef()
+/**
+ * HeroSection: The "Cyber-Core" centerpiece.
+ * Abstract 3D geometry representing the core of the portfolio.
+ */
+export const HeroSection = () => {
+  const coreRef = useRef()
+  const ring1Ref = useRef()
+  const ring2Ref = useRef()
 
   useFrame((state) => {
-    group.current.rotation.y = state.clock.getElapsedTime() * 0.2
-    group.current.rotation.z = state.clock.getElapsedTime() * 0.1
+    const time = state.clock.getElapsedTime()
+    
+    // Core rotation
+    if (coreRef.current) {
+      coreRef.current.rotation.x = time * 0.2
+      coreRef.current.rotation.y = time * 0.3
+    }
+
+    // Orbiting rings rotation
+    if (ring1Ref.current) {
+      ring1Ref.current.rotation.z = time * 0.5
+      ring1Ref.current.rotation.x = time * 0.2
+    }
+    if (ring2Ref.current) {
+      ring2Ref.current.rotation.z = -time * 0.3
+      ring2Ref.current.rotation.y = time * 0.4
+    }
   })
 
   return (
-    <group ref={group} {...props}>
-      {/* Central Core */}
-      <mesh>
-        <sphereGeometry args={[1.5, 32, 32]} />
-        <MeshDistortMaterial
-          color="#00f2ff"
-          speed={2}
-          distort={0.4}
-          radius={1}
-          emissive="#00f2ff"
-          emissiveIntensity={0.5}
-        />
-      </mesh>
+    <group>
+      {/* 🔮 Central Core Entity */}
+      <Float speed={5} rotationIntensity={2} floatIntensity={2}>
+        <mesh ref={coreRef} castShadow>
+          <icosahedronGeometry args={[2, 15]} />
+          <MeshDistortMaterial 
+            color="#00f2ff" 
+            speed={2} 
+            distort={0.4} 
+            radius={1}
+            emissive="#004455"
+            emissiveIntensity={0.5}
+            roughness={0}
+            metalness={1}
+          />
+        </mesh>
+      </Float>
 
-      {/* Orbiting Rings */}
-      <mesh rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[3, 0.05, 16, 100]} />
+      {/* 💫 Technical Orbit Rings */}
+      <mesh ref={ring1Ref} rotation={[Math.PI / 4, 0, 0]}>
+        <torusGeometry args={[3.5, 0.02, 16, 100]} />
         <meshStandardMaterial color="#7000ff" emissive="#7000ff" emissiveIntensity={2} />
       </mesh>
-      
-      <mesh rotation={[0, Math.PI / 4, 0]}>
-        <torusGeometry args={[3.5, 0.02, 16, 100]} />
-        <meshStandardMaterial color="#00f2ff" emissive="#00f2ff" emissiveIntensity={1} />
+
+      <mesh ref={ring2Ref} rotation={[-Math.PI / 4, Math.PI / 2, 0]}>
+        <torusGeometry args={[4.2, 0.015, 16, 100]} />
+        <meshStandardMaterial color="#00f2ff" emissive="#00f2ff" emissiveIntensity={2} />
       </mesh>
 
-      {/* Floating Particles/Nodes */}
-      {Array.from({ length: 20 }).map((_, i) => (
-        <Float key={i} speed={2} rotationIntensity={2} floatIntensity={2}>
-          <mesh position={[
-            (Math.random() - 0.5) * 8,
-            (Math.random() - 0.5) * 8,
-            (Math.random() - 0.5) * 8
-          ]}>
-            <boxGeometry args={[0.2, 0.2, 0.2]} />
-            <meshStandardMaterial color={i % 2 === 0 ? "#00f2ff" : "#7000ff"} emissive={i % 2 === 0 ? "#00f2ff" : "#7000ff"} emissiveIntensity={2} />
-          </mesh>
+      {/* 💠 Data Bits (Small floating cubes) */}
+      {[...Array(50)].map((_, i) => (
+        <Float key={i} speed={Math.random() * 2} rotationIntensity={2} floatIntensity={2}>
+          <Box 
+            args={[0.05, 0.05, 0.05]} 
+            position={[
+              (Math.random() - 0.5) * 10,
+              (Math.random() - 0.5) * 10,
+              (Math.random() - 0.5) * 10
+            ]}
+          >
+            <meshStandardMaterial 
+              color={i % 2 === 0 ? "#00f2ff" : "#7000ff"} 
+              emissive={i % 2 === 0 ? "#00f2ff" : "#7000ff"} 
+              emissiveIntensity={1}
+            />
+          </Box>
         </Float>
       ))}
-
-      {/* Grid Floor for depth */}
-      <gridHelper args={[20, 20, "#7000ff", "#101020"]} position={[0, -5, 0]} rotation={[0, 0, 0]} />
     </group>
   )
 }
