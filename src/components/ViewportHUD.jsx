@@ -1,136 +1,83 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { ContactForm } from './ContactForm'
 
 /**
- * Overlay component handles the HTML/HUD layer.
- * Using a clean, modular structure for easy updates.
+ * ViewportHUD: The "Pill" Navigation and HUD layer.
+ * Overhauled to match the high-end Avatar Showcase aesthetic.
  */
 export const ViewportHUD = () => {
+  const [isContactOpen, setContactOpen] = useState(false)
+
   return (
     <div className="overlay-container">
-      {/* 🚀 HUD Header - Fixed Navigation */}
+      {/* 🚀 Overhauled Pill Navigation */}
       <nav style={{ 
-        position: 'fixed', top: '2rem', left: '10%', right: '10%', 
-        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-        zIndex: 100
-      }} className="hud-interactive">
-        <div className="hud-text" style={{ fontSize: '1.2rem', fontWeight: 900 }}>
-          Teja<span style={{ color: '#fff' }}>.sys</span>
-        </div>
-        <div style={{ display: 'flex', gap: '2.5rem' }}>
-          {['Logic', 'Gear', 'Artifacts', 'Signal'].map(item => (
-            <div key={item} className="hud-text" style={{ cursor: 'pointer', fontSize: '0.7rem' }}>
-              {item}
-            </div>
-          ))}
+        position: 'fixed', top: '2.5rem', left: '0', right: '0',
+        display: 'flex', justifyContent: 'center', alignItems: 'center',
+        zIndex: 100, pointerEvents: 'none'
+      }}>
+        <div className="pill-nav" style={{ pointerEvents: 'all' }}>
+          <div className="nav-link active">ABOUT</div>
+          <div className="nav-link">PROJECTS</div>
+          <div className="nav-link">GITHUB</div>
         </div>
       </nav>
 
-      {/* 📍 Section 1: Hero (Welcome) */}
-      <section style={{ height: '100vh' }}>
-        <div style={{ maxWidth: '700px' }}>
-          <div className="hud-text pulse" style={{ marginBottom: '1.5rem' }}>
-            {`> STATUS: ONLINE`}
-          </div>
+      {/* 🟠 Primary CTA (Orange Button) */}
+      <div style={{
+        position: 'fixed', top: '2.5rem', right: '5%',
+        zIndex: 100
+      }}>
+        <button 
+          className="pill-button"
+          onClick={() => setContactOpen(true)}
+        >
+          GET IN TOUCH
+        </button>
+      </div>
+
+      {/* 📍 Hero Text Overlay */}
+      <section style={{ height: '100vh', justifyContent: 'flex-start', paddingTop: '15vh' }}>
+        <div style={{ maxWidth: '800px' }}>
           <h1 style={{ 
-            fontSize: 'max(4rem, 6vw)', 
-            lineHeight: 0.9, 
-            marginBottom: '2rem',
+            fontSize: 'max(4.5rem, 7vw)', 
             fontFamily: 'var(--font-display)',
-            fontWeight: 800
+            fontWeight: 900,
+            lineHeight: 0.85,
+            marginBottom: '1rem',
+            color: '#1a1a1a'
           }}>
-            CRAFTING <br />
-            <span className="text-gradient">DIGITAL</span> <br />
-            FRONTIERS
+            TEJA <br />
+            <span className="text-gradient">KUCHALLAPATI</span>
           </h1>
           <p style={{ 
             color: 'var(--text-dim)', 
-            fontSize: '1.1rem', 
-            borderLeft: '2px solid var(--accent-cyan)', 
-            paddingLeft: '2rem',
-            maxWidth: '500px'
+            fontSize: '1.2rem', 
+            fontWeight: 400,
+            letterSpacing: '0.1em',
+            borderLeft: '4px solid var(--accent-orange)',
+            paddingLeft: '1.5rem'
           }}>
-            Architecting high-performance immersive experiences at the intersection of Art and Engineering.
+            FULL-STACK ARCHITECT // 3D EXPERIENCE ENGINEER
           </p>
         </div>
       </section>
 
-      {/* 📍 Section 2: Skills (Stack) */}
-      <section style={{ height: '100vh', alignItems: 'flex-end' }}>
-        <div style={{ width: '100%', textAlign: 'right' }}>
-          <div className="hud-text" style={{ marginBottom: '1.5rem' }}>
-            {`> MODULE: CORE_ENGINE`}
-          </div>
-          <h2 style={{ fontSize: 'max(3rem, 5vw)', marginBottom: '2.5rem', fontFamily: 'var(--font-display)' }}>
-            PRECISION <br /> <span className="text-gradient">ENGINEERING</span>
-          </h2>
-          <div className="glass-panel neon-border" style={{ 
-            display: 'inline-block', 
-            textAlign: 'left', 
-            padding: '2rem 3.5rem' 
-          }}>
-            <p className="hud-text" style={{ fontSize: '0.65rem', marginBottom: '0.8rem' }}>ACTIVE_LOAD:</p>
-            <div style={{ display: 'flex', gap: '3rem', fontSize: '1.1rem', fontWeight: 600 }}>
-              <span>React / Next.js</span>
-              <span>Node / GraphQL</span>
-              <span>Three.js / GLSL</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 📍 Section 3: Projects (Artifacts) */}
-      <section style={{ height: '100vh' }}>
-        <div className="hud-text" style={{ marginBottom: '1.5rem' }}>
-          {`> MODULE: ARTIFACT_VAULT`}
-        </div>
-        <h2 style={{ fontSize: 'max(3rem, 5vw)', marginBottom: '2.5rem', fontFamily: 'var(--font-display)' }}>
-          PROTOTYPE <br /><span className="text-gradient">MANIFEST</span>
-        </h2>
-        <div className="hud-text" style={{ fontSize: '0.8rem', opacity: 0.5 }}>
-          [ SCROLL_TO_DISCOVER_INTERACTIVE_MODULES ]
-        </div>
-      </section>
-
-      {/* 📍 Section 4: Contact (Signal) */}
-      <section style={{ height: '100vh', alignItems: 'center' }}>
-        <div className="glass-panel" style={{ textAlign: 'center', padding: '4rem', width: '100%', maxWidth: '900px' }}>
-          <div className="hud-text pulse" style={{ marginBottom: '2.5rem' }}>
-            {`> ESTABLISH_COMM_LINK: AWAITING...`}
-          </div>
-          <h2 style={{ fontSize: 'max(3rem, 4vw)', marginBottom: '1.5rem', fontFamily: 'var(--font-display)' }}>
-            EMIT <span className="text-gradient">SIGNAL</span>
-          </h2>
-          <p style={{ color: 'var(--text-dim)', marginBottom: '4rem', fontSize: '1.1rem' }}>
-            Ready to integrate with high-impact teams and experimental projects world-wide.
-          </p>
-          <div style={{ 
-            fontSize: 'clamp(1rem, 3vw, 2rem)', 
-            fontWeight: 800, 
-            marginBottom: '4rem', 
-            fontFamily: 'var(--font-mono)',
-            color: 'var(--accent-cyan)'
-          }}>
-            TEJA26KT@GMAIL.COM
-          </div>
-          <button className="neon-border hud-interactive" style={{ 
-            background: 'transparent', color: '#fff', padding: '1.2rem 4rem', 
-            borderRadius: '4px', cursor: 'pointer', fontWeight: 900,
-            fontFamily: 'var(--font-mono)', fontSize: '0.9rem'
-          }}>
-            INITIATE_HANDSHAKE
-          </button>
-        </div>
-      </section>
-
-      {/* 🛸 HUD Footer - Performance Stats */}
+      {/* 🛸 Bottom Telemetry */}
       <footer style={{ 
-        position: 'fixed', bottom: '2rem', left: '10%', right: '10%', 
+        position: 'fixed', bottom: '2rem', left: '5%', right: '5%', 
         display: 'flex', justifyContent: 'space-between',
-        zIndex: 100
+        zIndex: 100, color: 'var(--text-dim)', fontSize: '0.7rem', fontWeight: 600
       }}>
-        <div className="hud-text">Kernel_Rev: 3.1.2</div>
-        <div className="hud-text">Sync: 17.3850° N, 78.4867° E</div>
+        <div>CORE_VERSION: 4.0.0</div>
+        <div>DESIGN_AUTH: TEJA.STUDIO</div>
       </footer>
+
+      {/* 📑 The Contact Modal */}
+      <ContactForm 
+        isOpen={isContactOpen} 
+        onClose={() => setContactOpen(false)} 
+      />
     </div>
   )
 }
