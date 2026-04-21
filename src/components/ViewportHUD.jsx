@@ -14,9 +14,9 @@ export const ViewportHUD = () => {
       <nav style={{ 
         position: 'fixed', top: '2.5rem', left: '0', right: '0',
         display: 'flex', justifyContent: 'center', alignItems: 'center',
-        zIndex: 100, pointerEvents: 'none'
+        zIndex: 100, pointerEvents: 'all'
       }}>
-        <div className="pill-nav" style={{ pointerEvents: 'all' }}>
+        <div className="pill-nav">
           <div className="nav-link active">ABOUT</div>
           <div className="nav-link">PROJECTS</div>
           <div className="nav-link">GITHUB</div>
@@ -37,8 +37,8 @@ export const ViewportHUD = () => {
       </div>
 
       {/* 📍 Hero Text Overlay */}
-      <section style={{ height: '100vh', justifyContent: 'flex-start', paddingTop: '15vh' }}>
-        <div style={{ maxWidth: '800px' }}>
+      <section className="hero-text-layer" style={{ height: '100vh', justifyContent: 'flex-start', paddingTop: '18vh' }}>
+        <div style={{ maxWidth: '800px', pointerEvents: 'all' }}>
           <h1 style={{ 
             fontSize: 'max(4.5rem, 7vw)', 
             fontFamily: 'var(--font-display)',
@@ -62,6 +62,25 @@ export const ViewportHUD = () => {
           </p>
         </div>
       </section>
+
+      {/* 🖱️ Floating Scroll Hint (From Reel) */}
+      <div style={{
+        position: 'fixed', bottom: '3rem', left: '50%', transform: 'translateX(-50%)',
+        zIndex: 100, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem',
+        opacity: 0.6
+      }}>
+        <div style={{ 
+          width: '24px', height: '36px', border: '2px solid var(--text-primary)', 
+          borderRadius: '12px', position: 'relative' 
+        }}>
+          <div style={{ 
+            width: '4px', height: '8px', background: 'var(--accent-orange)', 
+            borderRadius: '2px', position: 'absolute', top: '6px', left: '8px',
+            animation: 'scroll-anim 1.5s infinite ease-in-out'
+          }} />
+        </div>
+        <div style={{ fontSize: '0.6rem', fontWeight: 800, color: 'var(--text-primary)' }}>SCROLL</div>
+      </div>
 
       {/* 🛸 Bottom Telemetry */}
       <footer style={{ 

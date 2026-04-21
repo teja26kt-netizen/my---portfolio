@@ -42,6 +42,18 @@ html, body, #root {
   z-index: 1;
 }
 
+.overlay-container {
+  position: relative;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.hero-text-layer {
+  position: relative;
+  z-index: 50;
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+}
+
 /* 💊 Pill UI Components */
 .pill-nav {
   background: var(--glass-bg);
@@ -155,6 +167,11 @@ input:focus, textarea:focus {
 }
 .letterbox.top { top: 0; }
 .letterbox.bottom { bottom: 0; }
+
+@keyframes scroll-anim {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(12px); opacity: 0; }
+}
 
 .radial-glow {
   position: absolute;

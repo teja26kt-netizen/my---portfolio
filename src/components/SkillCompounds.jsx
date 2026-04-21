@@ -1,113 +1,106 @@
 import React, { useRef, useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
-import { Text, Sphere, Float } from '@react-three/drei'
+import { Text, Sphere, Float, MeshDistortMaterial } from '@react-three/drei'
 import * as THREE from 'three'
 
 /**
- * SkillCompounds: A glowing, connected network of technical skills.
- * Represents the 'Target State' of the cinematic transformation.
+ * SkillCompounds V2: The 'Absolute High-Fidelity' Skill Network.
+ * Reconstructed as a dense, high-impact 'Cyber Core' that blooms into existence 
+ * during the cinematic character morph.
  */
 export const SkillCompounds = ({ opacity = 1, scale = 1 }) => {
   const groupRef = useRef()
 
   const skills = [
-    { name: 'React', color: '#00f2ff' },
-    { name: 'Next.js', color: '#ffffff' },
-    { name: 'Three.js', color: '#ff8c00' },
-    { name: 'Node', color: '#33ff00' },
-    { name: 'GLSL', color: '#00f2ff' },
-    { name: 'Framer', color: '#e10098' }
+    { name: 'REACT', color: '#00f2ff', pos: [2, 2, 0] },
+    { name: 'THREE.JS', color: '#ff8c00', pos: [-2, 2, 0] },
+    { name: 'NEXT.JS', color: '#ffffff', pos: [0, -3, 0] },
+    { name: 'GLSL', color: '#00f2ff', pos: [3, -1, 0] },
+    { name: 'NODE', color: '#33ff00', pos: [-3, -1, 0] },
+    { name: 'FRAMER', color: '#e10098', pos: [0, 3, 0] }
   ]
 
-  // Generate random stable positions for the nodes
-  const nodes = useMemo(() => {
-    return skills.map((skill, i) => {
-      const angle = (i / skills.length) * Math.PI * 2
-      const radius = 5 + Math.random() * 2
-      return {
-        ...skill,
-        position: [
-          Math.cos(angle) * radius,
-          Math.sin(angle) * radius,
-          (Math.random() - 0.5) * 3
-        ]
-      }
-    })
-  }, [])
-
-  // Create connecting lines (compounds)
+  // Dense Bond Geometry
   const lines = useMemo(() => {
     const pts = []
-    nodes.forEach((node, i) => {
-      // Connect to the next node and the center
-      const nextNode = nodes[(i + 1) % nodes.length]
-      pts.push(new THREE.Vector3(...node.position))
-      pts.push(new THREE.Vector3(...nextNode.position))
-      
-      pts.push(new THREE.Vector3(...node.position))
+    skills.forEach((skill, i) => {
+      // Connect every node to its neighbors and the center
+      const nextSkill = skills[(i + 1) % skills.length]
       pts.push(new THREE.Vector3(0, 0, 0))
+      pts.push(new THREE.Vector3(...skill.pos))
+      pts.push(new THREE.Vector3(...skill.pos))
+      pts.push(new THREE.Vector3(...nextSkill.pos))
     })
     return new THREE.BufferGeometry().setFromPoints(pts)
-  }, [nodes])
+  }, [])
 
   useFrame((state) => {
     if (groupRef.current) {
-      groupRef.current.rotation.y = state.clock.getElapsedTime() * 0.1
-      groupRef.current.rotation.z = Math.sin(state.clock.getElapsedTime() * 0.2) * 0.05
+      groupRef.current.rotation.y = state.clock.getElapsedTime() * 0.2
+      groupRef.current.rotation.z = Math.sin(state.clock.getElapsedTime() * 0.1) * 0.1
     }
   })
 
   return (
     <group ref={groupRef} scale={scale} visible={opacity > 0.01}>
-      {/* 🕸 The Neural Mesh (Lines) */}
+      {/* 🌀 The Core (Luminous Module) */}
+      <mesh>
+        <octahedronGeometry args={[1.2, 0]} />
+        <meshStandardMaterial 
+          color="#00f2ff" 
+          emissive="#00f2ff" 
+          emissiveIntensity={2 * opacity} 
+          transparent 
+          opacity={0.4 * opacity} 
+          wireframe 
+        />
+      </mesh>
+      
+      <Sphere args={[0.5, 32, 32]}>
+         <MeshDistortMaterial color="#00f2ff" speed={5} distort={0.5} radius={1} />
+      </Sphere>
+
+      {/* 🕸️ The Technical Bonds */}
       <lineSegments geometry={lines}>
         <lineBasicMaterial 
           color="#00f2ff" 
           transparent 
-          opacity={0.1 * opacity} 
+          opacity={0.2 * opacity} 
           blending={THREE.AdditiveBlending} 
         />
       </lineSegments>
 
-      {/* 🔮 Skill Nodes */}
-      {nodes.map((node, i) => (
-        <group key={i} position={node.position}>
-          <Float speed={2} rotationIntensity={1} floatIntensity={1}>
-            <Sphere args={[0.25, 16, 16]}>
-              <meshStandardMaterial 
-                color={node.color} 
-                emissive={node.color} 
-                emissiveIntensity={2 * opacity} 
-                transparent 
-                opacity={opacity}
-              />
+      {/* 🔮 Primary Compounds (Skill Spheres) */}
+      {skills.map((skill, i) => (
+        <group key={i} position={skill.pos}>
+          <Float speed={3} rotationIntensity={1} floatIntensity={1}>
+            <Sphere args={[0.4, 32, 32]}>
+               <meshStandardMaterial 
+                 color={skill.color} 
+                 emissive={skill.color} 
+                 emissiveIntensity={1.5 * opacity}
+                 transparent 
+                 opacity={0.8 * opacity}
+               />
             </Sphere>
             <Text
-              position={[0, 0.6, 0]}
+              position={[0, 0.8, 0]}
               fontSize={0.4}
               color="white"
-              anchorX="center"
-              anchorY="middle"
+              fontWeight={900}
               transparent
               opacity={opacity}
             >
-              {node.name}
+              {skill.name}
             </Text>
+            {/* Inner Detail */}
+            <mesh>
+               <boxGeometry args={[0.2, 0.2, 0.2]} />
+               <meshBasicMaterial color="white" wireframe transparent opacity={0.2 * opacity} />
+            </mesh>
           </Float>
         </group>
       ))}
-
-      {/* 🌀 Central Core Module */}
-      <Sphere args={[1, 32, 32]}>
-        <meshStandardMaterial 
-          color="#ff8c00" 
-          emissive="#ff8c00" 
-          emissiveIntensity={1 * opacity} 
-          transparent 
-          opacity={0.2 * opacity}
-          wireframe
-        />
-      </Sphere>
     </group>
   )
 }
