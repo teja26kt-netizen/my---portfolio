@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react'
 import { Canvas } from '@react-three/fiber'
-import { ScrollControls, Scroll, Float, Sparkles, Environment } from '@react-three/drei'
+import { ScrollControls, Scroll, Environment, Float, Sparkles } from '@react-three/drei'
 import { EffectComposer, Bloom, Noise } from '@react-three/postprocessing'
 import { CinematicCamera } from './CinematicCamera'
 import { HeroSection } from '../sections/HeroSection'
@@ -24,7 +24,16 @@ export const Experience = () => {
         <pointLight position={[-10, -10, -10]} color="#7000ff" intensity={0.5} />
         <pointLight position={[5, 5, 5]} color="#00f2ff" intensity={0.8} />
 
-        <Suspense fallback={null}>
+        <Suspense fallback={
+          <Scroll html>
+            <div style={{
+              width: '100vw', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center',
+              background: '#020205', color: '#00f2ff', fontFamily: 'var(--font-mono)', letterSpacing: '0.5em'
+            }}>
+              SYSTEM_BOOTING...
+            </div>
+          </Scroll>
+        }>
           <Environment preset="city" />
           
           <ScrollControls pages={4} damping={0.1}>
@@ -36,15 +45,16 @@ export const Experience = () => {
 
             <SkillsOrbit position={[0, -15, 0]} />
             
-            <ProjectPanels position={[0, -30, 0]} />
+            {/* <ProjectPanels position={[0, -30, 0]} /> */}
 
             {/* Atmosphere */}
-            <Sparkles count={200} scale={20} size={1} speed={0.4} color="#00f2ff" />
+            {/* <Sparkles count={200} scale={20} size={1} speed={0.4} color="#00f2ff" /> */}
             
-            <EffectComposer>
+            {/* Temporarily disabled post-processing to isolate blank page issue */}
+            {/* <EffectComposer>
               <Bloom luminanceThreshold={1} mipmapBlur intensity={1.5} />
               <Noise opacity={0.05} />
-            </EffectComposer>
+            </EffectComposer> */}
 
             <Scroll html>
               <Overlay />
