@@ -72,8 +72,6 @@ export const SkillsOrbit = ({ position = [0, 0, 0] }) => {
                 position={[0, 0.7, 0]}
                 fontSize={0.4}
                 color="white"
-                font="/fonts/Inter-Bold.woff" // Fallback to system font if not provided
-                anchorX="center"
                 anchorY="middle"
               >
                 {skill.name}
