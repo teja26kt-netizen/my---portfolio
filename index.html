@@ -212,10 +212,17 @@
         </div>
       </div>
 
-      <!-- Skill pills (right column) -->
-      <div class="skills-right">
-        <div class="skill-pill-group reveal reveal-d1">
-          <h4>Frontend</h4>
+      <!-- Skill pills (right column) with Bucket Spawner -->
+      <div class="skills-right" style="position: relative;">
+        <!-- The Bucket -->
+        <div class="skill-bucket" id="skillBucket">
+          <div class="bucket-mouth"></div>
+          <p>Skills Spawner</p>
+        </div>
+        
+        <div id="spawnerContainer" class="pill-spawner-grid">
+          <div class="skill-pill-group reveal reveal-d1">
+            <h4>Frontend</h4>
           <span class="pill pill-blue"><i data-lucide="layout"></i> React</span>
           <span class="pill pill-gray"><i data-lucide="zap"></i> Next.js</span>
           <span class="pill pill-blue"><i data-lucide="code-2"></i> TypeScript</span>

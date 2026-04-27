@@ -166,3 +166,36 @@ document.querySelectorAll('.char-anim').forEach(el => {
     el.appendChild(span);
   });
 });
+
+// ── Skill Spawner Logic ─────────────────────────────────────
+const bucket = document.getElementById('skillBucket');
+const spawnerPills = document.querySelectorAll('#spawnerContainer .pill');
+
+if (bucket && spawnerPills.length) {
+  let hasSpawned = false;
+
+  const triggerSpawn = () => {
+    if (hasSpawned) return;
+    hasSpawned = true;
+    
+    bucket.classList.add('active');
+    
+    spawnerPills.forEach((pill, i) => {
+      setTimeout(() => {
+        pill.classList.add('spawned');
+        // Trigger a little bounce on the bucket for each pop
+        bucket.style.transform = 'scale(1.1)';
+        setTimeout(() => { bucket.style.transform = ''; }, 100);
+      }, i * 150);
+    });
+  };
+
+  // Intersection Observer to trigger when visible
+  const obs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) triggerSpawn();
+  }, { threshold: 0.5 });
+  obs.observe(bucket);
+
+  // Also trigger on click
+  bucket.addEventListener('click', triggerSpawn);
+}
