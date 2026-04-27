@@ -6,10 +6,13 @@
   <title>Teja · Full Stack Engineer</title>
   <meta name="description" content="Premium developer portfolio — Teja, Full Stack Engineer specialising in immersive web experiences.">
 
-  <!-- Fonts -->
+   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Space+Grotesk:wght@300..700&family=Syne:wght@400..800&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 
   <!-- Three.js (CDN) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -52,7 +55,7 @@
   <!-- Hero text -->
   <div class="hero-content">
     <div class="hero-eyebrow">Available for work · Full Stack Engineer</div>
-    <h1 class="hero-name">
+    <h1 class="hero-name char-anim">
       Teja<br><span>Innovator</span>
     </h1>
     <p class="hero-role">
@@ -103,7 +106,7 @@
     <div class="about-visual reveal">
       <div class="avatar-frame">
         <!-- Replace the emoji with <img src="assets/avatar.jpg" alt="Alex Mercer"> -->
-        <img src="assets/teja.png" alt="Teja" style="width:100%;height:100%;object-fit:cover;display:block;">
+      <img src="assets/teja.png" alt="Teja" style="width:100%;height:100%;object-fit:cover;display:block;" data-editable="image" data-id="profile-img">
         <div class="avatar-glow"></div>
       </div>
       <div class="floating-badge b1">
@@ -161,7 +164,7 @@
 
     <div class="reveal">
       <div class="section-tag">Technical Skills</div>
-      <h2 class="section-title">My <span>expertise</span></h2>
+      <h2 class="section-title char-anim">My <span>expertise</span></h2>
       <p class="section-subtitle">A curated view of the technologies I use to build remarkable products.</p>
     </div>
 
@@ -198,29 +201,41 @@
       <div class="skills-right">
         <div class="skill-pill-group reveal reveal-d1">
           <h4>Frontend</h4>
-          <span class="pill">React</span><span class="pill">Next.js</span>
-          <span class="pill">TypeScript</span><span class="pill">Tailwind CSS</span>
-          <span class="pill">Framer Motion</span><span class="pill">Three.js</span>
-          <span class="pill cyan-pill">GSAP</span>
+          <span class="pill"><i data-lucide="layout"></i> React</span>
+          <span class="pill"><i data-lucide="zap"></i> Next.js</span>
+          <span class="pill"><i data-lucide="code-2"></i> TypeScript</span>
+          <span class="pill"><i data-lucide="palette"></i> Tailwind CSS</span>
+          <span class="pill"><i data-lucide="motion-cpw"></i> Framer Motion</span>
+          <span class="pill"><i data-lucide="box"></i> Three.js</span>
+          <span class="pill cyan-pill"><i data-lucide="sparkles"></i> GSAP</span>
         </div>
         <div class="skill-pill-group reveal reveal-d2">
           <h4>Backend</h4>
-          <span class="pill">Node.js</span><span class="pill">Python</span>
-          <span class="pill">GraphQL</span><span class="pill">REST APIs</span>
-          <span class="pill cyan-pill">PostgreSQL</span><span class="pill">MongoDB</span>
-          <span class="pill">Redis</span>
+          <span class="pill"><i data-lucide="server"></i> Node.js</span>
+          <span class="pill"><i data-lucide="terminal"></i> Python</span>
+          <span class="pill"><i data-lucide="network"></i> GraphQL</span>
+          <span class="pill"><i data-lucide="link"></i> REST APIs</span>
+          <span class="pill cyan-pill"><i data-lucide="database"></i> PostgreSQL</span>
+          <span class="pill"><i data-lucide="database"></i> MongoDB</span>
+          <span class="pill"><i data-lucide="cpu"></i> Redis</span>
         </div>
         <div class="skill-pill-group reveal reveal-d3">
           <h4>DevOps &amp; Cloud</h4>
-          <span class="pill">AWS</span><span class="pill">Docker</span>
-          <span class="pill">Kubernetes</span><span class="pill cyan-pill">CI/CD</span>
-          <span class="pill">Terraform</span><span class="pill">Vercel</span>
+          <span class="pill"><i data-lucide="cloud"></i> AWS</span>
+          <span class="pill"><i data-lucide="box"></i> Docker</span>
+          <span class="pill"><i data-lucide="ship"></i> Kubernetes</span>
+          <span class="pill cyan-pill"><i data-lucide="git-branch"></i> CI/CD</span>
+          <span class="pill"><i data-lucide="binary"></i> Terraform</span>
+          <span class="pill"><i data-lucide="globe"></i> Vercel</span>
         </div>
         <div class="skill-pill-group reveal reveal-d4">
           <h4>Tools &amp; Other</h4>
-          <span class="pill">Git</span><span class="pill">Figma</span>
-          <span class="pill">Jest</span><span class="pill">Playwright</span>
-          <span class="pill cyan-pill">AI/ML APIs</span><span class="pill">WebSockets</span>
+          <span class="pill"><i data-lucide="github"></i> Git</span>
+          <span class="pill"><i data-lucide="figma"></i> Figma</span>
+          <span class="pill"><i data-lucide="test-tube"></i> Jest</span>
+          <span class="pill"><i data-lucide="eye"></i> Playwright</span>
+          <span class="pill cyan-pill"><i data-lucide="brain-circuit"></i> AI/ML APIs</span>
+          <span class="pill"><i data-lucide="message-square"></i> WebSockets</span>
         </div>
       </div>
     </div>
@@ -237,7 +252,7 @@
     <div class="projects-header">
       <div class="reveal">
         <div class="section-tag">Selected Work</div>
-        <h2 class="section-title">Featured <span>projects</span></h2>
+        <h2 class="section-title char-anim">Featured <span>projects</span></h2>
       </div>
       <div class="filter-tabs reveal reveal-d2">
         <button class="filter-btn active" data-filter="all">All</button>
@@ -252,7 +267,7 @@
 
       <!-- Card 1 -->
       <div class="project-card reveal" data-cat="fullstack">
-        <div class="project-thumb">
+        <div class="project-thumb" data-editable="image" data-id="project-1-img">
           <div class="project-thumb-bg p-t1"></div>
           <div class="project-glow"></div>
           <span class="project-emoji">📊</span>
@@ -263,7 +278,7 @@
             <span class="project-tag cyan">Chart.js</span>
             <span class="project-tag">Express</span>
           </div>
-          <h3 class="project-name">Learning Tracker</h3>
+          <h3 class="project-name" data-editable="text" data-id="project-1-title">Learning Tracker</h3>
           <p class="project-desc">A full-stack dashboard for tracking educational goals, featuring interactive charts, streak systems, and real-time data persistence.</p>
           <div class="project-links">
             <a href="#" class="project-link">
@@ -633,6 +648,41 @@
   <div class="footer-credit">Built for humans. Powered by curiosity.</div>
 </footer>
 
+<!-- ── EDIT MODE UI ───────────────────────────────────────────── -->
+<button id="edit-toggle">
+  <i data-lucide="edit-3"></i> Enable Edit Mode
+</button>
+
+<div class="modal-overlay" id="editModal">
+  <div class="edit-modal">
+    <button class="modal-close" id="closeModal">&times;</button>
+    <h3 id="modalTitle">Edit Element</h3>
+    
+    <div id="textEditor" style="display: none;">
+      <div class="form-group">
+        <label>Content</label>
+        <textarea id="editContent"></textarea>
+      </div>
+    </div>
+
+    <div id="imageEditor" style="display: none;">
+      <div class="form-group">
+        <label>Upload New Image (Local Only)</label>
+        <input type="file" id="fileInput" accept="image/*">
+        <p style="font-size: .7rem; color: var(--c-muted); margin-top: .5rem;">
+          Note: This will update the element in your browser. Use Chrome/Edge to save permanently via File System API.
+        </p>
+      </div>
+      <div class="form-group">
+        <label>Or Image Path</label>
+        <input type="text" id="imgPath" placeholder="assets/new-image.png">
+      </div>
+    </div>
+
+    <button class="form-submit" id="saveBtn">Save Changes</button>
+  </div>
+</div>
+
 <!-- ── SCRIPTS (load order matters) ──────────────────────── -->
 <script src="js/cursor.js"></script>
 <script src="js/nav.js"></script>
@@ -640,7 +690,13 @@
 <script src="js/three-scene.js"></script>
 <script src="js/particles.js"></script>
 <script src="js/animations.js"></script>
+<script src="js/edit-mode.js"></script>
 <script src="js/form.js"></script>
+
+<script>
+  // Initialise Lucide icons
+  lucide.createIcons();
+</script>
 
 </body>
 </html>

@@ -68,3 +68,14 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     }
   });
 });
+
+// ── Character splatting for animated text ────────────────────
+document.querySelectorAll('.char-anim').forEach(el => {
+  const text = el.textContent.trim();
+  el.textContent = '';
+  [...text].forEach(char => {
+    const span = document.createElement('span');
+    span.textContent = char === ' ' ? '\u00A0' : char;
+    el.appendChild(span);
+  });
+});

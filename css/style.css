@@ -18,11 +18,13 @@
   --c-pink: #f472b6;
   --c-grad: linear-gradient(135deg, #7c5cfc, #00e5ff);
   --c-grad2: linear-gradient(135deg, #f472b6, #7c5cfc);
-  --font-display: 'Bricolage Grotesque', sans-serif;
+  --font-display: 'Syne', 'Inter', sans-serif;
   --font-body: 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
+  --font-special: 'Space Grotesk', sans-serif;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ── RESET ──────────────────────────────────────────────────── */
@@ -50,24 +52,36 @@ body::after {
 
 /* ── CURSOR ─────────────────────────────────────────────────── */
 #cursor {
-  position: fixed; width: 12px; height: 12px;
-  background: var(--c-cyan); border-radius: 50%;
-  pointer-events: none; z-index: 9999;
+  position: fixed; width: 8px; height: 8px;
+  background: #fff; border-radius: 50%;
+  pointer-events: none; z-index: 99999;
   transform: translate(-50%, -50%);
-  transition: width .2s, height .2s, background .2s;
-  mix-blend-mode: screen;
+  transition: transform .1s var(--ease-out), width .3s, height .3s, background .3s;
+  mix-blend-mode: difference;
 }
 #cursor-ring {
-  position: fixed; width: 36px; height: 36px;
-  border: 1px solid rgba(0,229,255,0.4); border-radius: 50%;
-  pointer-events: none; z-index: 9998;
+  position: fixed; width: 40px; height: 40px;
+  border: 1px solid rgba(255,255,255,0.3); border-radius: 50%;
+  pointer-events: none; z-index: 99998;
   transform: translate(-50%, -50%);
-  transition: width .4s var(--ease-out), height .4s var(--ease-out), border-color .3s;
+  transition: width .5s var(--ease-out), height .5s var(--ease-out), border-color .3s, border-width .3s;
+  background: transparent;
 }
-body:has(a:hover) #cursor,
-body:has(button:hover) #cursor { width: 20px; height: 20px; background: var(--c-purple); }
-body:has(a:hover) #cursor-ring,
-body:has(button:hover) #cursor-ring { width: 60px; height: 60px; border-color: rgba(124,92,252,0.5); }
+
+/* Cursor States */
+body.cursor-hover #cursor { width: 0; height: 0; opacity: 0; }
+body.cursor-hover #cursor-ring {
+  width: 80px; height: 80px;
+  background: rgba(124,92,252,0.15);
+  border-color: var(--c-purple);
+  border-width: 2px;
+}
+body.cursor-video #cursor-ring {
+  width: 100px; height: 100px;
+  border-style: dashed;
+  animation: rotate 10s linear infinite;
+}
+@keyframes rotate { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
 
 /* ── NAV ────────────────────────────────────────────────────── */
 nav {
@@ -317,7 +331,10 @@ section { min-height: 100vh; position: relative; padding: 8rem 3rem 4rem; }
   background: var(--c-surface); border: 1px solid var(--c-border);
   font-size: .8rem; font-weight: 500; letter-spacing: .02em;
   transition: all .2s; cursor: default;
+  display: inline-flex; align-items: center; gap: .5rem;
 }
+.pill i { width: 14px; height: 14px; opacity: .7; transition: transform .3s; }
+.pill:hover i { transform: scale(1.2) rotate(5deg); opacity: 1; }
 .pill:hover { border-color: var(--c-border-hi); color: var(--c-violet); background: rgba(124,92,252,.08); }
 .pill.cyan-pill:hover { border-color: rgba(0,229,255,.3); color: var(--c-cyan); background: rgba(0,229,255,.05); }
 
@@ -580,6 +597,67 @@ footer {
   .tech-float    { display: none; }
 }
 @media (max-width: 600px) {
-  .about-stats   { grid-template-columns: 1fr 1fr; }
-  .projects-grid, .certs-grid { grid-template-columns: 1fr; }
+}
+
+/* ── SPECIALIZED TEXT EFFECTS ───────────────────────────────── */
+.char-anim { display: inline-block; position: relative; cursor: default; }
+.char-anim span {
+  display: inline-block;
+  transition: transform .4s var(--ease-bounce), color .3s;
+}
+.char-anim:hover span {
+  color: var(--c-purple);
+  transform: translateY(-8px) rotate(var(--r, 5deg));
+}
+.char-anim span:nth-child(odd) { --r: -8deg; }
+.char-anim span:nth-child(even) { --r: 8deg; }
+
+/* ── EDIT MODE UI ───────────────────────────────────────────── */
+.edit-mode-active [data-editable] {
+  outline: 2px dashed var(--c-purple);
+  outline-offset: 4px;
+  cursor: cell !important;
+  position: relative;
+}
+.edit-mode-active [data-editable]::after {
+  content: '✎ Edit';
+  position: absolute; top: -10px; right: -10px;
+  background: var(--c-purple); color: #fff;
+  font-size: .6rem; padding: .2rem .5rem;
+  border-radius: .3rem; z-index: 1000;
+  pointer-events: none;
+}
+#edit-toggle {
+  position: fixed; bottom: 2rem; right: 2rem;
+  z-index: 10000;
+  padding: .75rem 1.25rem;
+  background: var(--c-bg3); border: 1px solid var(--c-border-hi);
+  border-radius: 100px; color: var(--c-violet);
+  font-size: .75rem; font-weight: 600; cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0,0,0,.5);
+  display: flex; align-items: center; gap: .5rem;
+  transition: all .3s;
+}
+#edit-toggle:hover { transform: translateY(-4px); background: #1a1a2e; }
+#edit-toggle.active { background: var(--c-purple); color: #fff; }
+
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,.85);
+  backdrop-filter: blur(10px); z-index: 100000;
+  display: none; align-items: center; justify-content: center;
+  padding: 2rem;
+}
+.modal-overlay.show { display: flex; }
+.edit-modal {
+  background: var(--c-bg2); width: 100%; max-width: 500px;
+  border-radius: 1.5rem; border: 1px solid var(--c-border-hi);
+  padding: 2rem; position: relative;
+  box-shadow: 0 30px 60px rgba(0,0,0,.8);
+}
+.edit-modal h3 { font-family: var(--font-display); margin-bottom: 1.5rem; }
+.edit-modal .form-group { margin-bottom: 1.5rem; }
+.modal-close {
+  position: absolute; top: 1.5rem; right: 1.5rem;
+  background: none; border: none; color: var(--c-muted);
+  cursor: pointer; font-size: 1.5rem;
 }
