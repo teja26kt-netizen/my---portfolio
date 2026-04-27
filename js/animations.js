@@ -178,14 +178,12 @@ if (bucket && spawnerPills.length) {
     if (hasSpawned) return;
     hasSpawned = true;
     
-    bucket.classList.add('active');
-    
     spawnerPills.forEach((pill, i) => {
       setTimeout(() => {
         pill.classList.add('spawned');
-        // Trigger a little bounce on the bucket for each pop
-        bucket.style.transform = 'scale(1.1)';
-        setTimeout(() => { bucket.style.transform = ''; }, 100);
+        // Bucket vibration effect
+        bucket.style.transform = 'translateY(-10px) scale(1.05)';
+        setTimeout(() => { bucket.style.transform = ''; }, 150);
       }, i * 150);
     });
   };
