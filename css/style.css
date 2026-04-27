@@ -59,18 +59,20 @@ body::after {
 /* ── CURSOR ─────────────────────────────────────────────────── */
 #cursor {
   position: fixed; top: 0; left: 0;
-  width: 10px; height: 10px;
+  width: 20px; height: 20px;
   background: #fff; border-radius: 50%;
   pointer-events: none; z-index: 99999;
-  transition: transform 0.1s;
+  transition: transform 0.05s linear;
 }
-#cursor-ring {
-  border: 1px solid rgba(255,255,255,0.3); border-radius: 50%;
+#cursor-shadow {
+  position: fixed; top: 0; left: 0;
+  width: 150px; height: 150px;
+  background: radial-gradient(circle, rgba(124,92,252,0.15) 0%, transparent 70%);
+  filter: blur(20px); border-radius: 50%;
   pointer-events: none; z-index: 99998;
-  transform: translate(-50%, -50%);
-  transition: width .5s var(--ease-out), height .5s var(--ease-out), border-color .3s, border-width .3s;
-  background: transparent;
+  transition: transform 0.2s cubic-bezier(0.17, 0.67, 0.83, 0.67);
 }
+#cursor-ring { display: none; }
 
 /* Cursor States */
 body.cursor-hover #cursor { width: 0; height: 0; opacity: 0; }
@@ -429,16 +431,23 @@ section { min-height: 100vh; position: relative; padding: 8rem 3rem 4rem; }
   letter-spacing: .1em; margin-bottom: 1rem;
 }
 
+.skills-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+  align-items: flex-start;
+}
+.skills-right {
+  display: flex; flex-direction: row; gap: 2rem;
+  align-items: flex-start;
+}
 .pill-spawner-grid {
   display: flex; flex-direction: column; gap: 2rem;
-  opacity: 1;
+  flex: 1; order: 1;
 }
-.pill { 
-  opacity: 0; transform: translateY(100px) scale(0);
-  transition: all .7s cubic-bezier(0.34, 1.56, 0.64, 1); 
+.skill-bucket {
+  width: 140px; height: 160px;
+  order: 2; margin-top: 2rem;
+  position: sticky; top: 150px;
 }
-.pill.spawned { opacity: 1; transform: translateY(0) scale(1); }
-#projects .container { display: flex; flex-direction: column; gap: 3rem; }
 .projects-header { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1.5rem; }
 .filter-tabs { display: flex; gap: .5rem; flex-wrap: wrap; }
 .filter-btn {
