@@ -300,8 +300,15 @@ section { min-height: 100vh; position: relative; padding: 8rem 3rem 4rem; }
 .avatar-frame {
   position: relative; width: 360px; height: 360px;
   border-radius: 2rem; overflow: hidden;
-  border: 1px solid var(--c-border);
+  border: 1px solid var(--c-border-hi);
+  background: rgba(255,255,255,0.02);
+  backdrop-filter: blur(10px);
 }
+.avatar-frame img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform .5s var(--ease-out);
+}
+.avatar-frame:hover img { transform: scale(1.05); }
 .avatar-placeholder {
   width: 100%; height: 100%;
   background: linear-gradient(135deg, #1a1030 0%, #0a1525 50%, #0d0820 100%);

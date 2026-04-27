@@ -126,6 +126,35 @@ if (themeToggle) {
   });
 }
 
+// ── Tech Badge Modal Handler ────────────────────────────────
+document.querySelectorAll('.tech-float').forEach(badge => {
+  badge.style.pointerEvents = 'auto';
+  badge.style.cursor = 'pointer';
+  badge.addEventListener('click', () => {
+    const tech = badge.dataset.tech;
+    const level = badge.dataset.level;
+    const projects = badge.dataset.projects;
+    if (!tech) return;
+
+    document.getElementById('techTitle').textContent = tech;
+    document.getElementById('techLevel').textContent = level;
+    document.getElementById('techProjects').textContent = projects;
+    document.getElementById('techModal').classList.add('show');
+  });
+});
+
+const closeTechModal = document.getElementById('closeTechModal');
+if (closeTechModal) {
+  closeTechModal.addEventListener('click', () => {
+    document.getElementById('techModal').classList.remove('show');
+  });
+}
+window.addEventListener('click', e => {
+  if (e.target.id === 'techModal') {
+    e.target.classList.remove('show');
+  }
+});
+
 // ── Character splatting for animated text ────────────────────
 document.querySelectorAll('.char-anim').forEach(el => {
   const text = el.textContent.trim();

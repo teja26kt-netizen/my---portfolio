@@ -86,16 +86,16 @@
     </div>
 
   <!-- Floating tech labels -->
-  <span class="tech-float"            style="top:18%;left:7%;--dur:7s;--delay:0s">⬡ WebGL</span>
-  <span class="tech-float purple-tag" style="top:28%;left:5%;--dur:9s;--delay:1.2s">{ TypeScript }</span>
-  <span class="tech-float"            style="top:60%;left:4%;--dur:8s;--delay:2s">◈ Three.js</span>
-  <span class="tech-float pink-tag"   style="top:72%;left:8%;--dur:6.5s;--delay:.5s">⌬ React</span>
-  <span class="tech-float purple-tag" style="top:82%;left:6%;--dur:10s;--delay:3s">[ Node.js ]</span>
-  <span class="tech-float"            style="top:15%;right:6%;--dur:8.5s;--delay:.8s">▷ Python</span>
-  <span class="tech-float pink-tag"   style="top:30%;right:5%;--dur:7.5s;--delay:1.8s">⎔ Docker</span>
-  <span class="tech-float purple-tag" style="top:55%;right:4%;--dur:9.5s;--delay:2.4s">⬡ Kubernetes</span>
-  <span class="tech-float"            style="top:70%;right:7%;--dur:7s;--delay:.3s">◉ GraphQL</span>
-  <span class="tech-float pink-tag"   style="top:85%;right:5%;--dur:11s;--delay:1s">⟨ AWS ⟩</span>
+  <span class="tech-float"            style="top:18%;left:7%;--dur:7s;--delay:0s"   data-tech="WebGL" data-level="Intermediate" data-projects="NeuroMorph 3D, ThreeScene">⬡ WebGL</span>
+  <span class="tech-float purple-tag" style="top:28%;left:5%;--dur:9s;--delay:1.2s" data-tech="TypeScript" data-level="Expert" data-projects="Learning Tracker, StreamPulse"> { TypeScript }</span>
+  <span class="tech-float"            style="top:60%;left:4%;--dur:8s;--delay:2s"   data-tech="Three.js" data-level="Advanced" data-projects="VisualForge, NeuroMorph">◈ Three.js</span>
+  <span class="tech-float pink-tag"   style="top:72%;left:8%;--dur:6.5s;--delay:.5s" data-tech="React" data-level="Expert" data-projects="All Frontend Projects">⌬ React</span>
+  <span class="tech-float purple-tag" style="top:82%;left:6%;--dur:10s;--delay:3s"  data-tech="Node.js" data-level="Expert" data-projects="StreamPulse API, Learning Tracker"> [ Node.js ]</span>
+  <span class="tech-float"            style="top:15%;right:6%;--dur:8.5s;--delay:.8s" data-tech="Python" data-level="Advanced" data-projects="NeuralDraft, AI Data Pipeline">▷ Python</span>
+  <span class="tech-float pink-tag"   style="top:30%;right:5%;--dur:7.5s;--delay:1.8s" data-tech="Docker" data-level="Advanced" data-projects="Microservices Hub">⎔ Docker</span>
+  <span class="tech-float purple-tag" style="top:55%;right:4%;--dur:9.5s;--delay:2.4s" data-tech="Kubernetes" data-level="Intermediate" data-projects="StreamPulse Infra">⬡ Kubernetes</span>
+  <span class="tech-float"            style="top:70%;right:7%;--dur:7s;--delay:.3s"  data-tech="GraphQL" data-level="Expert" data-projects="Orbit Analytics">◉ GraphQL</span>
+  <span class="tech-float pink-tag"   style="top:85%;right:5%;--dur:11s;--delay:1s"  data-tech="AWS" data-level="Advanced" data-projects="Solutions Architect Cert">⟨ AWS ⟩</span>
   <span class="tech-float"            style="top:8%;left:30%;--dur:12s;--delay:2.2s">// git commit</span>
   <span class="tech-float purple-tag" style="top:88%;right:32%;--dur:8s;--delay:4s">npm run build</span>
 
@@ -664,6 +664,23 @@
 <button id="edit-toggle">
   <i data-lucide="edit-3"></i> Enable Edit Mode
 </button>
+
+<div class="modal-overlay" id="techModal">
+  <div class="edit-modal">
+    <button class="modal-close" id="closeTechModal">&times;</button>
+    <div id="techContent">
+      <h3 id="techTitle">Technology</h3>
+      <div class="form-group">
+        <label>Experience Level</label>
+        <p id="techLevel" style="color: var(--c-purple); font-weight: 700;"></p>
+      </div>
+      <div class="form-group">
+        <label>Featured Projects</label>
+        <p id="techProjects" style="font-size: .9rem; line-height: 1.6;"></p>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="modal-overlay" id="editModal">
   <div class="edit-modal">
