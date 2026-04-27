@@ -181,10 +181,10 @@ section { min-height: 100vh; position: relative; padding: 8rem 3rem 4rem; }
   50% { box-shadow: 0 0 0 6px rgba(0,229,255,0); }
 }
 .hero-name {
-  font-family: var(--font-display);
-  font-size: clamp(3.5rem, 9vw, 7.5rem);
-  font-weight: 800; line-height: .92;
-  letter-spacing: -.04em;
+  font-family: var(--font-special); /* Using Space Grotesk for a sharper feel */
+  font-size: clamp(3.5rem, 9vw, 8rem);
+  font-weight: 700; line-height: .85;
+  letter-spacing: -.06em;
   animation: fadeUp .8s .1s var(--ease-out) both;
 }
 .hero-name span {

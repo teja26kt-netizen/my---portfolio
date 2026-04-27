@@ -76,8 +76,7 @@ if (eyebrow) {
     "> whoami",
     "Full Stack Engineer",
     "UI/UX Focused Developer",
-    "Creative Technologist",
-    "> contact --me"
+    "Creative Technologist"
   ];
   let pIdx = 0, cIdx = 0, isDeleting = false;
 
