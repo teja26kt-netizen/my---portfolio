@@ -1,7 +1,7 @@
 /* ============================================================
    three-scene.js — Three.js hero scene
-   Objects: DNA double helix · orbiting icosahedra
-            floating octahedra · glowing ring halos
+   Objects: Orbiting icosahedra · floating octahedra
+            glowing ring halos
    ============================================================ */
 
 (function () {
@@ -36,72 +36,10 @@
   scene.add(lWhite);
 
   // ── SHARED MATERIALS ────────────────────────────────────
-  const matNodeA = new THREE.MeshPhongMaterial({ color: 0x00e5ff, emissive: 0x003a4a, shininess: 120, transparent: true, opacity: 0.95 });
-  const matNodeB = new THREE.MeshPhongMaterial({ color: 0x00ffd5, emissive: 0x002a2a, shininess: 120, transparent: true, opacity: 0.90 });
-  const matRung  = new THREE.MeshBasicMaterial({ color: 0x00ffd5, transparent: true, opacity: 0.35 });
   const matWire  = new THREE.MeshBasicMaterial({ color: 0x00e5ff, wireframe: true, transparent: true, opacity: 0.18 });
   const matWire2 = new THREE.MeshBasicMaterial({ color: 0x00ffd5, wireframe: true, transparent: true, opacity: 0.14 });
   const matWire3 = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, transparent: true, opacity: 0.10 });
 
-  // ── DNA DOUBLE HELIX ────────────────────────────────────
-  const dnaGroup = new THREE.Group();
-  scene.add(dnaGroup);
-
-  const STEPS  = 60;
-  const HEIGHT = 5.5;
-  const RADIUS = 0.72;
-
-  const nodeGeo  = new THREE.SphereGeometry(0.08, 12, 12);
-  const strandA  = [];
-  const strandB  = [];
-
-  for (let i = 0; i <= STEPS; i++) {
-    const frac  = i / STEPS;
-    const angle = frac * Math.PI * 6;          // 3 full turns
-    const y     = (frac - 0.5) * HEIGHT;
-
-    // Strand A
-    const ax = Math.cos(angle) * RADIUS;
-    const az = Math.sin(angle) * RADIUS;
-    const nA = new THREE.Mesh(nodeGeo, i % 3 === 0 ? matNodeA : matNodeB);
-    nA.position.set(ax, y, az);
-    dnaGroup.add(nA);
-    strandA.push(new THREE.Vector3(ax, y, az));
-
-    // Strand B (opposite side)
-    const bx = Math.cos(angle + Math.PI) * RADIUS;
-    const bz = Math.sin(angle + Math.PI) * RADIUS;
-    const nB = new THREE.Mesh(nodeGeo, i % 3 === 0 ? matNodeB : matNodeA);
-    nB.position.set(bx, y, bz);
-    dnaGroup.add(nB);
-    strandB.push(new THREE.Vector3(bx, y, bz));
-
-    // Rungs every 3 steps
-    if (i % 3 === 0 && i < STEPS) {
-      const dir = new THREE.Vector3(bx - ax, 0, bz - az);
-      const len = dir.length();
-      const mid = new THREE.Vector3((ax + bx) / 2, y, (az + bz) / 2);
-      const rung = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.015, 0.015, len, 6),
-        matRung
-      );
-      rung.position.copy(mid);
-      rung.quaternion.setFromUnitVectors(
-        new THREE.Vector3(0, 1, 0),
-        dir.clone().normalize()
-      );
-      dnaGroup.add(rung);
-    }
-  }
-
-  // Smooth tube strands
-  function makeTube(pts, mat) {
-    const curve = new THREE.CatmullRomCurve3(pts);
-    const geo   = new THREE.TubeGeometry(curve, 120, 0.028, 6, false);
-    dnaGroup.add(new THREE.Mesh(geo, mat));
-  }
-  makeTube(strandA, new THREE.MeshPhongMaterial({ color: 0x00e5ff, emissive: 0x002233, transparent: true, opacity: 0.7, shininess: 80 }));
-  makeTube(strandB, new THREE.MeshPhongMaterial({ color: 0x00ffd5, emissive: 0x002233, transparent: true, opacity: 0.7, shininess: 80 }));
 
   // ── ORBITING WIREFRAME ICOSAHEDRA ────────────────────────
   const icoGeo = new THREE.IcosahedronGeometry(0.38, 1);
@@ -183,15 +121,6 @@
     requestAnimationFrame(animate);
     frame++;
     const T = frame * 0.01;
-
-    // DNA
-    dnaGroup.rotation.y = T * 0.4 + mouseX * 0.25;
-    dnaGroup.rotation.x = mouseY * 0.15;
-    dnaGroup.children.forEach((ch, i) => {
-      if (ch.geometry && ch.geometry.type === 'SphereGeometry') {
-        ch.scale.setScalar(1 + 0.12 * Math.sin(T * 3 + i * 0.4));
-      }
-    });
 
     // Orbiting icosahedra
     icos.forEach((ico, i) => {
