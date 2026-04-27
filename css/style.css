@@ -641,6 +641,8 @@ footer {
   .form-row      { grid-template-columns: 1fr; }
   .about-stats   { grid-template-columns: repeat(3,1fr); }
   .floating-badge { display: none; }
+}
+
 /* ── ENTRANCE SEQUENCE ──────────────────────────────────────── */
 body.loading { overflow: hidden; }
 nav { transform: translateY(-100%); opacity: 0; }
@@ -652,8 +654,6 @@ nav { transform: translateY(-100%); opacity: 0; }
 .entrance-complete #hero-bg, 
 .entrance-complete #three-canvas, 
 .entrance-complete #particles { opacity: 1; }
-@media (max-width: 600px) {
-}
 
 /* ── SPECIALIZED TEXT EFFECTS ───────────────────────────────── */
 .char-anim { display: inline-block; position: relative; cursor: default; }
