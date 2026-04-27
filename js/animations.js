@@ -103,6 +103,29 @@ if (eyebrow) {
   type();
 }
 
+// ── Entrance Sequence ───────────────────────────────────────
+window.addEventListener('load', () => {
+  document.body.classList.add('loading');
+  setTimeout(() => {
+    document.body.classList.remove('loading');
+    document.body.classList.add('entrance-complete');
+  }, 500); // Small delay to ensure WebGL/Styles are ready
+});
+
+// ── Theme Toggle ────────────────────────────────────────────
+const themeToggle = document.getElementById('theme-toggle');
+if (themeToggle) {
+  // Check local storage for preference
+  const currentTheme = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', currentTheme);
+
+  themeToggle.addEventListener('click', () => {
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  });
+}
+
 // ── Character splatting for animated text ────────────────────
 document.querySelectorAll('.char-anim').forEach(el => {
   const text = el.textContent.trim();

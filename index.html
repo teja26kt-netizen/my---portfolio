@@ -37,10 +37,16 @@
     <li><a href="#certifications">Certs</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <a href="#contact" class="nav-cta">Hire Me</a>
-  <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">
-    <span></span><span></span><span></span>
-  </button>
+  <div style="display: flex; align-items: center; gap: 1rem;">
+    <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">
+      <i data-lucide="moon" class="moon-icon"></i>
+      <i data-lucide="sun" class="sun-icon"></i>
+    </button>
+    <a href="#contact" class="nav-cta">Hire Me</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
 <!-- ═══════════════════════════════════════════════════════
@@ -93,7 +99,12 @@
   <span class="tech-float"            style="top:8%;left:30%;--dur:12s;--delay:2.2s">// git commit</span>
   <span class="tech-float purple-tag" style="top:88%;right:32%;--dur:8s;--delay:4s">npm run build</span>
 
-  <div class="hero-scroll">Scroll <div class="scroll-line"></div></div>
+  <div class="hero-scroll">
+    <span>Explore</span>
+    <div class="mouse-icon">
+      <div class="wheel"></div>
+    </div>
+  </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════
