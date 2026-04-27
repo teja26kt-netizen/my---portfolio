@@ -58,23 +58,13 @@ body::after {
 
 /* ── CURSOR ─────────────────────────────────────────────────── */
 #cursor {
-  position: fixed; width: 6px; height: 6px;
+  position: fixed; top: 0; left: 0;
+  width: 10px; height: 10px;
   background: #fff; border-radius: 50%;
   pointer-events: none; z-index: 99999;
-  transform: translate(-50%, -50%);
-  transition: transform .1s var(--ease-out), width .3s, height .3s, background .3s;
-  mix-blend-mode: difference;
-  box-shadow: 0 0 15px 5px rgba(0,229,255,0.4);
-}
-.cursor-dot-trail {
-  position: fixed; width: 4px; height: 4px;
-  background: var(--c-purple); border-radius: 50%;
-  pointer-events: none; z-index: 99997;
-  transform: translate(-50%, -50%);
-  opacity: 0.6;
+  transition: transform 0.1s;
 }
 #cursor-ring {
-  position: fixed; width: 40px; height: 40px;
   border: 1px solid rgba(255,255,255,0.3); border-radius: 50%;
   pointer-events: none; z-index: 99998;
   transform: translate(-50%, -50%);
@@ -383,16 +373,32 @@ section { min-height: 100vh; position: relative; padding: 8rem 3rem 4rem; }
 .skill-pill-group { display: flex; flex-wrap: wrap; gap: .6rem; }
 .skill-pill-group h4 { width: 100%; font-size: .7rem; color: var(--c-muted); letter-spacing: .1em; text-transform: uppercase; margin-bottom: .25rem; }
 .pill {
-  padding: .4rem 1rem; border-radius: 100px;
+  padding: .5rem 1rem; border-radius: 8px;
   background: var(--c-surface); border: 1px solid var(--c-border);
-  font-size: .8rem; font-weight: 500; letter-spacing: .02em;
-  transition: all .2s; cursor: default;
-  display: inline-flex; align-items: center; gap: .5rem;
+  font-size: .85rem; font-weight: 600; letter-spacing: .02em;
+  transition: all .3s cubic-bezier(0.23, 1, 0.32, 1);
+  cursor: default;
+  display: inline-flex; align-items: center; gap: .6rem;
+  color: var(--c-text);
+  overflow: hidden; position: relative;
 }
-.pill i { width: 14px; height: 14px; opacity: .7; transition: transform .3s; }
-.pill:hover i { transform: scale(1.2) rotate(5deg); opacity: 1; }
-.pill:hover { border-color: var(--c-border-hi); color: var(--c-violet); background: rgba(124,92,252,.08); }
-.pill.cyan-pill:hover { border-color: rgba(0,229,255,.3); color: var(--c-cyan); background: rgba(0,229,255,.05); }
+.pill::before {
+  content: ''; position: absolute; inset: 0;
+  background: currentColor; opacity: 0; transition: opacity .3s;
+}
+.pill:hover::before { opacity: 0.1; }
+.pill i { width: 16px; height: 16px; transition: transform .5s var(--ease-bounce); }
+.pill:hover i { transform: scale(1.2) rotate(10deg); }
+
+/* Badge Colors */
+.pill-blue   { color: #3b82f6; border-color: rgba(59,130,246,0.5); }
+.pill-purple { color: #8b5cf6; border-color: rgba(139,92,246,0.5); }
+.pill-amber  { color: #f59e0b; border-color: rgba(245,158,11,0.5); }
+.pill-red    { color: #ef4444; border-color: rgba(239,68,68,0.5); }
+.pill-pink   { color: #ec4899; border-color: rgba(236,72,153,0.5); }
+.pill-green  { color: #22c55e; border-color: rgba(34,197,94,0.5); }
+.pill-teal   { color: #14b8a6; border-color: rgba(20,184,166,0.5); }
+.pill-gray   { color: #94a3b8; border-color: rgba(148,163,184,0.5); }
 
 /* ── PROJECTS ───────────────────────────────────────────────── */
 #projects .container { display: flex; flex-direction: column; gap: 3rem; }
