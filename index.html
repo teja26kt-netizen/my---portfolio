@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teja · Full Stack Engineer</title>
+  <meta name="description" content="Premium developer portfolio — Teja, Full Stack Engineer specialising in immersive web experiences.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+
+  <!-- Three.js (CDN) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ── CUSTOM CURSOR ─────────────────────────────────────── -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- ── NAV ──────────────────────────────────────────────── -->
+<nav id="navbar">
+  <span class="nav-logo">TEJA.</span>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#resume">Resume</a></li>
+    <li><a href="#certifications">Certs</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Hire Me</a>
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════════════ -->
+<section id="hero">
+  <!-- Canvas layers (back → front): tech bg · three.js · particles -->
+  <canvas id="hero-bg"></canvas>
+  <canvas id="three-canvas"></canvas>
+  <canvas id="particles"></canvas>
+
+  <!-- Hero text -->
+  <div class="hero-content">
+    <div class="hero-eyebrow">Available for work · Full Stack Engineer</div>
+    <h1 class="hero-name">
+      Teja<br><span>Innovator</span>
+    </h1>
+    <p class="hero-role">
+      I build <em>immersive digital experiences</em> that live at the
+      intersection of design &amp; engineering
+    </p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path d="M7 17L17 7M17 7H7M17 7v10"/>
+        </svg>
+        View Projects
+      </a>
+      <a href="#resume" class="btn-outline">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+        </svg>
+        Download Resume
+      </a>
+    </div>
+  </div>
+
+  <!-- Floating tech labels -->
+  <span class="tech-float"            style="top:18%;left:7%;--dur:7s;--delay:0s">⬡ WebGL</span>
+  <span class="tech-float purple-tag" style="top:28%;left:5%;--dur:9s;--delay:1.2s">{ TypeScript }</span>
+  <span class="tech-float"            style="top:60%;left:4%;--dur:8s;--delay:2s">◈ Three.js</span>
+  <span class="tech-float pink-tag"   style="top:72%;left:8%;--dur:6.5s;--delay:.5s">⌬ React</span>
+  <span class="tech-float purple-tag" style="top:82%;left:6%;--dur:10s;--delay:3s">[ Node.js ]</span>
+  <span class="tech-float"            style="top:15%;right:6%;--dur:8.5s;--delay:.8s">▷ Python</span>
+  <span class="tech-float pink-tag"   style="top:30%;right:5%;--dur:7.5s;--delay:1.8s">⎔ Docker</span>
+  <span class="tech-float purple-tag" style="top:55%;right:4%;--dur:9.5s;--delay:2.4s">⬡ Kubernetes</span>
+  <span class="tech-float"            style="top:70%;right:7%;--dur:7s;--delay:.3s">◉ GraphQL</span>
+  <span class="tech-float pink-tag"   style="top:85%;right:5%;--dur:11s;--delay:1s">⟨ AWS ⟩</span>
+  <span class="tech-float"            style="top:8%;left:30%;--dur:12s;--delay:2.2s">// git commit</span>
+  <span class="tech-float purple-tag" style="top:88%;right:32%;--dur:8s;--delay:4s">npm run build</span>
+
+  <div class="hero-scroll">Scroll <div class="scroll-line"></div></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     ABOUT
+════════════════════════════════════════════════════════ -->
+<section id="about">
+  <div class="grid-bg"></div>
+  <div class="container">
+
+    <!-- Visual side -->
+    <div class="about-visual reveal">
+      <div class="avatar-frame">
+        <!-- Replace the emoji with <img src="assets/avatar.jpg" alt="Alex Mercer"> -->
+        <img src="assets/teja.png" alt="Teja" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="avatar-glow"></div>
+      </div>
+      <div class="floating-badge b1">
+        <div class="fb-icon cyan">⚡</div>
+        <div>
+          <div style="font-size:.75rem;color:var(--c-muted)">Projects Built</div>
+          <div style="font-weight:700">50+</div>
+        </div>
+      </div>
+      <div class="floating-badge b2">
+        <div class="fb-icon purple">🏆</div>
+        <div>
+          <div style="font-size:.75rem;color:var(--c-muted)">Years Exp.</div>
+          <div style="font-weight:700">6+</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Text side -->
+    <div class="about-text">
+      <div class="reveal reveal-d1">
+        <div class="section-tag">About Me</div>
+        <h2 class="section-title">Crafting the <span>future</span> of the web</h2>
+      </div>
+
+      <div class="about-bio reveal reveal-d2">
+        <p>Hey! I'm Teja — a <strong>Full Stack Engineer</strong> with a passion for turning complex problems into elegant, performant solutions. I specialise in building applications that don't just work — they <strong>inspire</strong>.</p>
+        <br>
+        <p>My expertise spans <strong>React, Node.js, TypeScript, and cloud architectures</strong>. I'm obsessed with the details: smooth animations, pixel-perfect interfaces, and code that's as clean as the design it powers.</p>
+        <br>
+        <p>When I'm not shipping products, I'm exploring <strong>WebGL, generative art</strong>, and the ever-evolving AI landscape.</p>
+      </div>
+
+      <div class="about-stats reveal reveal-d3">
+        <div class="stat-card"><span class="stat-num">6+</span><span class="stat-label">Years Experience</span></div>
+        <div class="stat-card"><span class="stat-num">50+</span><span class="stat-label">Projects Shipped</span></div>
+        <div class="stat-card"><span class="stat-num">12+</span><span class="stat-label">Happy Clients</span></div>
+      </div>
+
+      <div class="reveal reveal-d4" style="display:flex;gap:1rem;flex-wrap:wrap">
+        <a href="#contact" class="btn-primary"  style="font-size:.85rem;padding:.75rem 1.5rem">Let's Work Together</a>
+        <a href="#resume"  class="btn-outline"  style="font-size:.85rem;padding:.75rem 1.5rem">View Resume</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     SKILLS
+════════════════════════════════════════════════════════ -->
+<section id="skills">
+  <div class="grid-bg" style="opacity:.5"></div>
+  <div class="container">
+
+    <div class="reveal">
+      <div class="section-tag">Technical Skills</div>
+      <h2 class="section-title">My <span>expertise</span></h2>
+      <p class="section-subtitle">A curated view of the technologies I use to build remarkable products.</p>
+    </div>
+
+    <div style="display:contents">
+      <!-- Skill bars (left column) -->
+      <div class="skills-left">
+        <div class="skill-item reveal reveal-d1">
+          <div class="skill-header"><span class="skill-name">React / Next.js</span><span class="skill-pct">95%</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div>
+        </div>
+        <div class="skill-item reveal reveal-d2">
+          <div class="skill-header"><span class="skill-name">TypeScript</span><span class="skill-pct">92%</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:92%"></div></div>
+        </div>
+        <div class="skill-item reveal reveal-d2">
+          <div class="skill-header"><span class="skill-name">Node.js / Express</span><span class="skill-pct">88%</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div>
+        </div>
+        <div class="skill-item reveal reveal-d3">
+          <div class="skill-header"><span class="skill-name">Python / FastAPI</span><span class="skill-pct">82%</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:82%"></div></div>
+        </div>
+        <div class="skill-item reveal reveal-d3">
+          <div class="skill-header"><span class="skill-name">Three.js / WebGL</span><span class="skill-pct">78%</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:78%"></div></div>
+        </div>
+        <div class="skill-item reveal reveal-d4">
+          <div class="skill-header"><span class="skill-name">AWS / Cloud Architecture</span><span class="skill-pct">80%</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
+        </div>
+      </div>
+
+      <!-- Skill pills (right column) -->
+      <div class="skills-right">
+        <div class="skill-pill-group reveal reveal-d1">
+          <h4>Frontend</h4>
+          <span class="pill">React</span><span class="pill">Next.js</span>
+          <span class="pill">TypeScript</span><span class="pill">Tailwind CSS</span>
+          <span class="pill">Framer Motion</span><span class="pill">Three.js</span>
+          <span class="pill cyan-pill">GSAP</span>
+        </div>
+        <div class="skill-pill-group reveal reveal-d2">
+          <h4>Backend</h4>
+          <span class="pill">Node.js</span><span class="pill">Python</span>
+          <span class="pill">GraphQL</span><span class="pill">REST APIs</span>
+          <span class="pill cyan-pill">PostgreSQL</span><span class="pill">MongoDB</span>
+          <span class="pill">Redis</span>
+        </div>
+        <div class="skill-pill-group reveal reveal-d3">
+          <h4>DevOps &amp; Cloud</h4>
+          <span class="pill">AWS</span><span class="pill">Docker</span>
+          <span class="pill">Kubernetes</span><span class="pill cyan-pill">CI/CD</span>
+          <span class="pill">Terraform</span><span class="pill">Vercel</span>
+        </div>
+        <div class="skill-pill-group reveal reveal-d4">
+          <h4>Tools &amp; Other</h4>
+          <span class="pill">Git</span><span class="pill">Figma</span>
+          <span class="pill">Jest</span><span class="pill">Playwright</span>
+          <span class="pill cyan-pill">AI/ML APIs</span><span class="pill">WebSockets</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     PROJECTS
+════════════════════════════════════════════════════════ -->
+<section id="projects">
+  <div class="container">
+
+    <div class="projects-header">
+      <div class="reveal">
+        <div class="section-tag">Selected Work</div>
+        <h2 class="section-title">Featured <span>projects</span></h2>
+      </div>
+      <div class="filter-tabs reveal reveal-d2">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="fullstack">Full Stack</button>
+        <button class="filter-btn" data-filter="frontend">Frontend</button>
+        <button class="filter-btn" data-filter="ai">AI/ML</button>
+        <button class="filter-btn" data-filter="backend">Backend</button>
+      </div>
+    </div>
+
+    <div class="projects-grid" id="projectsGrid">
+
+      <!-- Card 1 -->
+      <div class="project-card reveal" data-cat="fullstack">
+        <div class="project-thumb">
+          <div class="project-thumb-bg p-t1"></div>
+          <div class="project-glow"></div>
+          <span class="project-emoji">📊</span>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="project-tag">React</span>
+            <span class="project-tag cyan">Chart.js</span>
+            <span class="project-tag">Express</span>
+          </div>
+          <h3 class="project-name">Learning Tracker</h3>
+          <p class="project-desc">A full-stack dashboard for tracking educational goals, featuring interactive charts, streak systems, and real-time data persistence.</p>
+          <div class="project-links">
+            <a href="#" class="project-link">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>Live
+            </a>
+            <a href="#" class="project-link">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="project-card reveal reveal-d1" data-cat="ai">
+        <div class="project-thumb">
+          <div class="project-thumb-bg p-t2"></div>
+          <div class="project-glow"></div>
+          <span class="project-emoji">💠</span>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="project-tag">Three.js</span>
+            <span class="project-tag cyan">WebGL</span>
+            <span class="project-tag">GSAP</span>
+          </div>
+          <h3 class="project-name">NeuroMorph 3D</h3>
+          <p class="project-desc">A cinematic 3D portfolio experience featuring heroic character morphing, neural networks, and fluid scroll-linked animations.</p>
+          <div class="project-links">
+            <a href="#" class="project-link"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>Live</a>
+            <a href="#" class="project-link"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="project-card reveal reveal-d2" data-cat="frontend">
+        <div class="project-thumb">
+          <div class="project-thumb-bg p-t3"></div>
+          <div class="project-glow"></div>
+          <span class="project-emoji">🎨</span>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="project-tag">Three.js</span>
+            <span class="project-tag cyan">WebGL</span>
+            <span class="project-tag">GSAP</span>
+          </div>
+          <h3 class="project-name">VisualForge Studio</h3>
+          <p class="project-desc">Browser-based 3D design tool with real-time collaboration, shader editing, and one-click export to multiple formats.</p>
+          <div class="project-links">
+            <a href="#" class="project-link"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>Live</a>
+            <a href="#" class="project-link"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="project-card reveal" data-cat="backend">
+        <div class="project-thumb">
+          <div class="project-thumb-bg p-t4"></div>
+          <div class="project-glow"></div>
+          <span class="project-emoji">⚡</span>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="project-tag">Node.js</span>
+            <span class="project-tag cyan">Redis</span>
+            <span class="project-tag">Kafka</span>
+          </div>
+          <h3 class="project-name">StreamPulse API</h3>
+          <p class="project-desc">High-throughput event streaming infrastructure processing 2M+ events/sec with intelligent rate limiting and fan-out.</p>
+          <div class="project-links">
+            <a href="#" class="project-link"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>Docs</a>
+            <a href="#" class="project-link"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="project-card reveal reveal-d1" data-cat="fullstack">
+        <div class="project-thumb">
+          <div class="project-thumb-bg p-t5"></div>
+          <div class="project-glow"></div>
+          <span class="project-emoji">📊</span>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="project-tag">React</span>
+            <span class="project-tag cyan">D3.js</span>
+            <span class="project-tag">GraphQL</span>
+          </div>
+          <h3 class="project-name">Orbit Analytics</h3>
+          <p class="project-desc">Real-time business intelligence dashboard with 40+ chart types, custom KPI builders, and AI-generated insights.</p>
+          <div class="project-links">
+            <a href="#" class="project-link"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>Live</a>
+            <a href="#" class="project-link"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="project-card reveal reveal-d2" data-cat="ai">
+        <div class="project-thumb">
+          <div class="project-thumb-bg p-t6"></div>
+          <div class="project-glow"></div>
+          <span class="project-emoji">🧠</span>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+            <span class="project-tag cyan">TensorFlow</span>
+            <span class="project-tag">React</span>
+          </div>
+          <h3 class="project-name">NeuralDraft</h3>
+          <p class="project-desc">AI writing assistant that learns your style over time — context-aware suggestions, tone adaptation, and multi-language support.</p>
+          <div class="project-links">
+            <a href="#" class="project-link"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>Live</a>
+            <a href="#" class="project-link"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>GitHub</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     RESUME
+════════════════════════════════════════════════════════ -->
+<section id="resume">
+  <div class="grid-bg"></div>
+  <div class="container">
+
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem">
+      <div class="reveal">
+        <div class="section-tag">Career History</div>
+        <h2 class="section-title">My <span>resume</span></h2>
+      </div>
+      <!-- Replace href with path to your actual PDF -->
+      <a href="assets/alex-mercer-resume.pdf" download class="dl-resume-btn reveal reveal-d2">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+        </svg>
+        Download PDF
+      </a>
+    </div>
+
+    <div class="resume-layout">
+
+      <!-- Sidebar -->
+      <div class="resume-sidebar">
+
+        <div class="resume-sidebar-card reveal reveal-d1">
+          <div class="rsc-title">Contact</div>
+          <div class="contact-item"><div class="contact-icon">📧</div>teja@developer.dev</div>
+          <div class="contact-item"><div class="contact-icon">📍</div>San Francisco, CA</div>
+          <div class="contact-item"><div class="contact-icon">🌐</div>teja.dev</div>
+          <div class="contact-item"><div class="contact-icon">💼</div>linkedin.com/in/teja-dev</div>
+        </div>
+
+        <div class="resume-sidebar-card reveal reveal-d2">
+          <div class="rsc-title">Education</div>
+          <div class="edu-item">
+            <div class="edu-degree">B.Sc. Computer Science</div>
+            <div class="edu-school">UC Berkeley</div>
+            <div class="edu-year">2014 – 2018</div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-degree">M.Sc. Software Engineering</div>
+            <div class="edu-school">Stanford University</div>
+            <div class="edu-year">2018 – 2020</div>
+          </div>
+        </div>
+
+        <div class="resume-sidebar-card reveal reveal-d3">
+          <div class="rsc-title">Core Competencies</div>
+          <div style="display:flex;flex-wrap:wrap;gap:.5rem">
+            <span class="pill" style="font-size:.75rem">System Design</span>
+            <span class="pill" style="font-size:.75rem">Team Leadership</span>
+            <span class="pill" style="font-size:.75rem">Agile / Scrum</span>
+            <span class="pill" style="font-size:.75rem">Code Review</span>
+            <span class="pill" style="font-size:.75rem">Mentorship</span>
+            <span class="pill" style="font-size:.75rem">Technical Writing</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Main timeline -->
+      <div class="resume-main">
+        <div class="timeline-section reveal reveal-d1">
+          <h3>Work Experience</h3>
+
+          <div class="timeline-item">
+            <div class="tl-role">Senior Full Stack Engineer</div>
+            <div class="tl-company">Vercel · Full-time</div>
+            <div class="tl-period">Jan 2023 – Present</div>
+            <div class="tl-desc">Led architecture of Next.js Edge Runtime, reducing cold starts by 60%. Mentored 8 engineers and established frontend performance standards adopted across 12 teams.</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="tl-role">Software Engineer II</div>
+            <div class="tl-company">Stripe · Full-time</div>
+            <div class="tl-period">Mar 2021 – Dec 2022</div>
+            <div class="tl-desc">Built core components of the Stripe Dashboard React redesign. Implemented real-time fraud detection UI handling 500k+ daily transactions. Reduced time-to-interactive by 40%.</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="tl-role">Frontend Engineer</div>
+            <div class="tl-company">Figma · Full-time</div>
+            <div class="tl-period">Jul 2020 – Feb 2021</div>
+            <div class="tl-desc">Contributed to multiplayer canvas engine, optimising WebSocket event batching for 10k+ concurrent users. Shipped the plugin API documentation experience.</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="tl-role">Junior Developer</div>
+            <div class="tl-company">Dropbox · Internship → FTE</div>
+            <div class="tl-period">May 2018 – Jun 2020</div>
+            <div class="tl-desc">Started as intern, converted full-time. Built the file preview rendering pipeline and contributed to the React Native mobile app redesign.</div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     CERTIFICATIONS
+════════════════════════════════════════════════════════ -->
+<section id="certifications">
+  <div class="container">
+
+    <div class="reveal">
+      <div class="section-tag">Credentials</div>
+      <h2 class="section-title">Certifi<span>cations</span></h2>
+      <p class="section-subtitle">Industry-recognised credentials validating deep technical expertise.</p>
+    </div>
+
+    <div class="certs-grid">
+      <div class="cert-card reveal reveal-d1">
+        <div class="cert-issuer-logo">☁️</div>
+        <div class="cert-name">AWS Solutions Architect</div>
+        <div class="cert-issuer">Amazon Web Services</div>
+        <div class="cert-date">Issued Mar 2024 · Expires Mar 2027</div>
+        <span class="cert-badge gold">⭐ Professional</span>
+      </div>
+      <div class="cert-card reveal reveal-d2">
+        <div class="cert-issuer-logo">🔷</div>
+        <div class="cert-name">Google Cloud Professional</div>
+        <div class="cert-issuer">Google Cloud</div>
+        <div class="cert-date">Issued Jan 2024 · Expires Jan 2026</div>
+        <span class="cert-badge">✓ Verified</span>
+      </div>
+      <div class="cert-card reveal reveal-d3">
+        <div class="cert-issuer-logo">⚛️</div>
+        <div class="cert-name">Meta React Advanced</div>
+        <div class="cert-issuer">Meta / Coursera</div>
+        <div class="cert-date">Issued Sep 2023 · No Expiry</div>
+        <span class="cert-badge purple">🎓 Specialist</span>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-issuer-logo">🐳</div>
+        <div class="cert-name">Certified Kubernetes Admin</div>
+        <div class="cert-issuer">Cloud Native Foundation</div>
+        <div class="cert-date">Issued Nov 2023 · Expires Nov 2025</div>
+        <span class="cert-badge">✓ Verified</span>
+      </div>
+      <div class="cert-card reveal reveal-d1">
+        <div class="cert-issuer-logo">🤖</div>
+        <div class="cert-name">TensorFlow Developer</div>
+        <div class="cert-issuer">Google / TensorFlow</div>
+        <div class="cert-date">Issued Jun 2023 · Expires Jun 2026</div>
+        <span class="cert-badge gold">⭐ Professional</span>
+      </div>
+      <div class="cert-card reveal reveal-d2">
+        <div class="cert-issuer-logo">🔐</div>
+        <div class="cert-name">Certified Security Pro</div>
+        <div class="cert-issuer">CompTIA</div>
+        <div class="cert-date">Issued Apr 2022 · No Expiry</div>
+        <span class="cert-badge purple">🎓 Specialist</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     CONTACT
+════════════════════════════════════════════════════════ -->
+<section id="contact">
+  <div class="grid-bg"></div>
+  <div class="container">
+
+    <!-- Left: info + socials -->
+    <div class="contact-info">
+      <div class="reveal">
+        <div class="section-tag">Get In Touch</div>
+        <h2 class="section-title">Let's build something <span>great</span></h2>
+      </div>
+      <p class="contact-cta-text reveal reveal-d1">
+        Whether you have a project in mind, a role to fill, or just want to say hello — my inbox is always open. I typically respond within 24 hours.
+      </p>
+      <div class="social-links reveal reveal-d2">
+        <a href="https://github.com/alexmercer" target="_blank" rel="noopener" class="social-link">
+          <div class="social-link-icon">🐙</div>GitHub · @alexmercer
+        </a>
+        <a href="https://linkedin.com/in/alexmercer" target="_blank" rel="noopener" class="social-link">
+          <div class="social-link-icon">💼</div>LinkedIn · Alex Mercer
+        </a>
+        <a href="https://twitter.com/alexm_dev" target="_blank" rel="noopener" class="social-link">
+          <div class="social-link-icon">🐦</div>Twitter/X · @alexm_dev
+        </a>
+        <a href="mailto:alex@mercer.dev" class="social-link">
+          <div class="social-link-icon">📧</div>alex@mercer.dev
+        </a>
+      </div>
+    </div>
+
+    <!-- Right: form -->
+    <div class="contact-form reveal reveal-d2" id="contactForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fname">First Name</label>
+          <input type="text" id="fname" placeholder="Jane">
+          <span class="form-error" id="fnameError">Please enter your name</span>
+        </div>
+        <div class="form-group">
+          <label for="lname">Last Name</label>
+          <input type="text" id="lname" placeholder="Doe">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="jane@company.com">
+        <span class="form-error" id="emailError">Please enter a valid email</span>
+      </div>
+      <div class="form-group">
+        <label for="subject">Subject</label>
+        <input type="text" id="subject" placeholder="Project inquiry, Collaboration…">
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" placeholder="Tell me about your project…"></textarea>
+        <span class="form-error" id="messageError">Please enter a message</span>
+      </div>
+      <button class="form-submit" id="submitBtn" onclick="handleFormSubmit(event)">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+        </svg>
+        Send Message
+      </button>
+      <div class="form-success" id="formSuccess">
+        <div style="font-size:2.5rem;margin-bottom:1rem">✅</div>
+        <h3>Message Sent!</h3>
+        <p>Thanks for reaching out. I'll get back to you within 24 hours.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-credit">© 2025 <span>Teja</span>. Crafted with passion &amp; Three.js.</div>
+  <div class="footer-credit">Built for humans. Powered by curiosity.</div>
+</footer>
+
+<!-- ── SCRIPTS (load order matters) ──────────────────────── -->
+<script src="js/cursor.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/hero-bg.js"></script>
+<script src="js/three-scene.js"></script>
+<script src="js/particles.js"></script>
+<script src="js/animations.js"></script>
+<script src="js/form.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "teja-portfolio",
+  "version": "1.0.0",
+  "description": "Premium Developer Portfolio",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "Teja",
+  "license": "MIT",
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}
