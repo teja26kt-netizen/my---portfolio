@@ -58,12 +58,20 @@ body::after {
 
 /* ── CURSOR ─────────────────────────────────────────────────── */
 #cursor {
-  position: fixed; width: 8px; height: 8px;
+  position: fixed; width: 6px; height: 6px;
   background: #fff; border-radius: 50%;
   pointer-events: none; z-index: 99999;
   transform: translate(-50%, -50%);
   transition: transform .1s var(--ease-out), width .3s, height .3s, background .3s;
   mix-blend-mode: difference;
+  box-shadow: 0 0 15px 5px rgba(0,229,255,0.4);
+}
+.cursor-dot-trail {
+  position: fixed; width: 4px; height: 4px;
+  background: var(--c-purple); border-radius: 50%;
+  pointer-events: none; z-index: 99997;
+  transform: translate(-50%, -50%);
+  opacity: 0.6;
 }
 #cursor-ring {
   position: fixed; width: 40px; height: 40px;

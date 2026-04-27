@@ -15,6 +15,11 @@
     H = c.height = window.innerHeight;
   });
 
+  let mouseX = -1000, mouseY = -1000;
+  window.addEventListener('mousemove', e => {
+    mouseX = e.clientX; mouseY = e.clientY;
+  });
+
   const COUNT = 55;
   const particles = Array.from({ length: COUNT }, () => ({
     x:     Math.random() * W,
@@ -30,6 +35,15 @@
 
     // Draw dots
     particles.forEach(p => {
+      // Repulsion
+      const mdx = p.x - mouseX;
+      const mdy = p.y - mouseY;
+      const md  = Math.sqrt(mdx * mdx + mdy * mdy);
+      if (md < 120) {
+        p.x += (mdx / md) * 1.5;
+        p.y += (mdy / md) * 1.5;
+      }
+
       p.x += p.vx; p.y += p.vy;
       if (p.x < 0) p.x = W;
       if (p.x > W) p.x = 0;
