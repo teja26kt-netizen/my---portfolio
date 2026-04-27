@@ -69,10 +69,45 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
+// ── CLI typing animation for hero eyebrow ────────────────────
+const eyebrow = document.getElementById('typing-eyebrow');
+if (eyebrow) {
+  const phrases = [
+    "> whoami",
+    "Full Stack Engineer",
+    "UI/UX Focused Developer",
+    "Creative Technologist",
+    "> contact --me"
+  ];
+  let pIdx = 0, cIdx = 0, isDeleting = false;
+
+  function type() {
+    const currentMsg = phrases[pIdx];
+    if (isDeleting) {
+      eyebrow.textContent = currentMsg.substring(0, cIdx--);
+    } else {
+      eyebrow.textContent = currentMsg.substring(0, cIdx++);
+    }
+
+    let speed = isDeleting ? 40 : 80;
+    if (!isDeleting && cIdx > currentMsg.length) {
+      speed = 2000; // pause at end
+      isDeleting = true;
+    } else if (isDeleting && cIdx === 0) {
+      isDeleting = false;
+      pIdx = (pIdx + 1) % phrases.length;
+      speed = 500;
+    }
+    setTimeout(type, speed);
+  }
+  type();
+}
+
 // ── Character splatting for animated text ────────────────────
 document.querySelectorAll('.char-anim').forEach(el => {
   const text = el.textContent.trim();
   el.textContent = '';
+  // Force reflow/preserve line breaks if any
   [...text].forEach(char => {
     const span = document.createElement('span');
     span.textContent = char === ' ' ? '\u00A0' : char;

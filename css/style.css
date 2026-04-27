@@ -170,9 +170,20 @@ section { min-height: 100vh; position: relative; padding: 8rem 3rem 4rem; }
 }
 .hero-role em { font-style: normal; color: var(--c-violet); }
 .hero-btns {
-  display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+  display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap;
   animation: fadeUp .8s .3s var(--ease-out) both;
+  margin-top: 2.5rem;
 }
+.hero-trust {
+  display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;
+  margin-top: 1.5rem; animation: fadeUp .8s .25s var(--ease-out) both;
+}
+.trust-item {
+  display: flex; align-items: center; gap: .5rem;
+  font-size: .85rem; color: var(--c-muted);
+  font-weight: 500;
+}
+.trust-item i { width: 16px; height: 16px; color: var(--c-cyan); }
 .hero-scroll {
   position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
   display: flex; flex-direction: column; align-items: center; gap: .5rem;
