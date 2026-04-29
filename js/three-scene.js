@@ -66,42 +66,42 @@
 
   const geometry = new THREE.BoxGeometry(CUBE_SIZE, CUBE_SIZE, CUBE_SIZE);
 
-  // A 3x3 flat array of boxes matching the user's "9 total boxes, 6 visible, 3 hidden"
-  const gridPositions = [];
-  for (let x = -1; x <= 1; x++) {
-    for (let y = -1; y <= 1; y++) {
-      gridPositions.push({x, y, z: 0});
+  // The reference image clearly shows a 2x3x3 cuboid!
+  // Front face (Orange) has 2 columns & 3 rows -> X axis has 2 blocks, Y has 3 blocks.
+  // Right face (Blue) has 3 columns & 3 rows -> Z axis has 3 blocks, Y has 3 blocks.
+  const xs = [-0.5, 0.5]; 
+  const ys = [-1, 0, 1];
+  const zs = [-1, 0, 1];
+
+  for (let xi = 0; xi < xs.length; xi++) {
+    for (let yi = 0; yi < ys.length; yi++) {
+      for (let zi = 0; zi < zs.length; zi++) {
+        const x = xs[xi];
+        const y = ys[yi];
+        const z = zs[zi];
+
+        // Apply colors matching the 2x3x3 cuboid in the reference image
+        const mats = [
+          x === 0.5 ? materials.right : materials.black,   // Right (+x) is Blue
+          x === -0.5 ? materials.black : materials.black,  // Left (-x) is Hidden/Back
+          y === 1 ? materials.top : materials.black,       // Top (+y) is Dark
+          y === -1 ? materials.black : materials.black,    // Bottom (-y) is Hidden
+          z === 1 ? materials.front : materials.black,     // Front (+z) is Orange
+          z === -1 ? materials.black : materials.black     // Back (-z) is Hidden
+        ];
+
+        const mesh = new THREE.Mesh(geometry, mats);
+        mesh.position.set(x * OFFSET, y * OFFSET, z * OFFSET);
+        
+        // Exact black borders
+        const edges = new THREE.EdgesGeometry(geometry);
+        const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 2 }));
+        mesh.add(line);
+
+        cubeGroup.add(mesh);
+      }
     }
   }
-
-  // Hide 3 specific boxes to make it an asymmetrical puzzle piece (indices 0 to 8)
-  const hiddenBoxes = [1, 5, 6]; 
-
-  gridPositions.forEach((pos, index) => {
-    if (hiddenBoxes.includes(index)) return; // Skip 3 boxes
-
-    const {x, y, z} = pos;
-    // Apply coloring: Front orange, back blue, sides dark. 
-    // Since it's a flat z=0 slice, front/back are prominent.
-    const mats = [
-      materials.top,     // Right
-      materials.top,     // Left
-      materials.top,     // Top
-      materials.top,     // Bottom
-      materials.front,   // Front (Orange)
-      materials.right    // Back (Blue)
-    ];
-
-    const mesh = new THREE.Mesh(geometry, mats);
-    mesh.position.set(x * OFFSET, y * OFFSET, z * OFFSET);
-    
-    // Exact black borders
-    const edges = new THREE.EdgesGeometry(geometry);
-    const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 2 }));
-    mesh.add(line);
-
-    cubeGroup.add(mesh);
-  });
 
   // Interactive Rotation State
   let targetRotationX = Math.PI / 6;
