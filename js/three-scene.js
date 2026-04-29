@@ -66,28 +66,18 @@
 
   const geometry = new THREE.BoxGeometry(CUBE_SIZE, CUBE_SIZE, CUBE_SIZE);
 
-  // The reference image clearly shows a 2x3x3 cuboid!
-  // Front face (Orange) has 2 columns & 3 rows -> X axis has 2 blocks, Y has 3 blocks.
-  // Right face (Blue) has 3 columns & 3 rows -> Z axis has 3 blocks, Y has 3 blocks.
-  const xs = [-0.5, 0.5]; 
-  const ys = [-1, 0, 1];
-  const zs = [-1, 0, 1];
-
-  for (let xi = 0; xi < xs.length; xi++) {
-    for (let yi = 0; yi < ys.length; yi++) {
-      for (let zi = 0; zi < zs.length; zi++) {
-        const x = xs[xi];
-        const y = ys[yi];
-        const z = zs[zi];
-
-        // Apply colors matching the 2x3x3 cuboid in the reference image
+  // Standard 3x3x3 Rubik's cube geometry
+  for (let x = -1; x <= 1; x++) {
+    for (let y = -1; y <= 1; y++) {
+      for (let z = -1; z <= 1; z++) {
+        // Apply colors exactly as seen from the standard isometric view
         const mats = [
-          x === 0.5 ? materials.right : materials.black,   // Right (+x) is Blue
-          x === -0.5 ? materials.black : materials.black,  // Left (-x) is Hidden/Back
-          y === 1 ? materials.top : materials.black,       // Top (+y) is Dark
-          y === -1 ? materials.black : materials.black,    // Bottom (-y) is Hidden
-          z === 1 ? materials.front : materials.black,     // Front (+z) is Orange
-          z === -1 ? materials.black : materials.black     // Back (-z) is Hidden
+          x === 1 ? materials.right : materials.black,   // Right (+x) is Blue
+          x === -1 ? materials.black : materials.black,  // Left (-x) is Hidden
+          y === 1 ? materials.top : materials.black,     // Top (+y) is Dark
+          y === -1 ? materials.black : materials.black,  // Bottom (-y) is Hidden
+          z === 1 ? materials.front : materials.black,   // Front (+z) is Orange
+          z === -1 ? materials.black : materials.black   // Back (-z) is Hidden
         ];
 
         const mesh = new THREE.Mesh(geometry, mats);
@@ -167,13 +157,17 @@
     isDragging = false;
   });
 
+  let time = 0;
   function animate() {
     requestAnimationFrame(animate);
     
-    // Auto idle rotation if not dragging
+    // Smooth, restricted breathing animation instead of continuous spin
+    // This keeps exactly 3 faces visible and 3 hidden, preventing the cube from spinning completely around
     if(!isDragging) {
-       targetRotationY += 0.001; 
-       targetRotationX += 0.0005;
+       time += 0.01;
+       // Sway slightly around the ideal isometric angles
+       targetRotationX = (Math.PI / 6) + Math.sin(time * 1.5) * 0.05;
+       targetRotationY = (Math.PI / 4) + Math.cos(time * 0.8) * 0.05;
     }
 
     // Smooth lerp
