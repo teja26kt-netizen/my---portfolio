@@ -28,61 +28,84 @@
 <div id="cursor-ring"></div>
 
 <!-- ── NAV ──────────────────────────────────────────────── -->
-<nav id="navbar">
-  <span class="nav-logo">TEJA.</span>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#resume">Resume</a></li>
-    <li><a href="#certifications">Certs</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <div style="display: flex; align-items: center; gap: 1rem;">
-    <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">
-      <i data-lucide="moon" class="moon-icon"></i>
-      <i data-lucide="sun" class="sun-icon"></i>
-    </button>
-    <a href="#contact" class="nav-cta">Hire Me</a>
-    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
+<nav id="navbar" style="position: absolute; top: 2rem; left: 50%; transform: translateX(-50%); width: 90%; max-width: 1200px; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; background: rgba(10, 11, 22, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; z-index: 100;">
+  <div class="nav-logo" style="display: flex; align-items: center; gap: 0.5rem; font-family: 'Inter', sans-serif; font-size: 1.2rem; font-weight: 800; color: #4A90E2;">
+    <span style="color: #7c5cfc;">■</span> Teja
   </div>
+  <ul class="nav-links" style="display: flex; gap: 2rem; list-style: none; margin: 0; padding: 0;">
+    <li><a href="#hero" style="color: #fff; font-size: 0.85rem; text-decoration: none; position: relative; padding-bottom: 0.3rem; border-bottom: 2px solid #00e5ff;">Home</a></li>
+    <li><a href="#about" style="color: #8b92b2; font-size: 0.85rem; text-decoration: none; transition: color 0.3s;">About</a></li>
+    <li><a href="#skills" style="color: #8b92b2; font-size: 0.85rem; text-decoration: none; transition: color 0.3s;">Skills</a></li>
+    <li><a href="#projects" style="color: #8b92b2; font-size: 0.85rem; text-decoration: none; transition: color 0.3s;">Projects</a></li>
+    <li><a href="#experience" style="color: #8b92b2; font-size: 0.85rem; text-decoration: none; transition: color 0.3s;">Experience</a></li>
+    <li><a href="#contact" style="color: #8b92b2; font-size: 0.85rem; text-decoration: none; transition: color 0.3s;">Contact</a></li>
+  </ul>
 </nav>
-
 <!-- ═══════════════════════════════════════════════════════
      HERO
 ════════════════════════════════════════════════════════ -->
-<section id="hero" style="overflow: hidden; position: relative; display: flex; align-items: center;">
-  <!-- Only 3D Canvas -->
-  <canvas id="three-canvas" style="position: absolute; width: 100%; height: 100%; z-index: 1;"></canvas>
+<section id="hero" style="min-height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; background: #070913; overflow: hidden;">
+  
+  <!-- Subtle Grid Background overlay to match the image -->
+  <div style="position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 50px 50px; pointer-events: none; z-index: 1;"></div>
+  
+  <!-- Cyan Top-Left Glow Line -->
+  <div style="position: absolute; top: 0; left: 0; width: 100px; height: 3px; background: #00e5ff; box-shadow: 0 0 20px #00e5ff; z-index: 2;"></div>
 
-  <!-- Clean, minimalist hero text overlay -->
-  <div class="hero-content" style="position: relative; z-index: 2; margin-left: 10vw; max-width: 650px; text-shadow: 0 4px 20px rgba(0,0,0,0.8); background: rgba(0,0,0,0.1); padding: 2rem; border-radius: 20px; backdrop-filter: blur(2px);">
-    <div class="hero-eyebrow" style="color: var(--c-cyan); font-weight: 600; letter-spacing: 3px; text-transform: uppercase;">Frontend Developer</div>
-    <h1 class="hero-name char-anim" style="font-size: 4.5rem; line-height: 1.1; margin: 1rem 0; font-family: 'Space Grotesk', sans-serif;">
-      Teja<br><span style="color: var(--c-purple);">Portfolio.</span>
-    </h1>
-    <p class="hero-role" style="font-size: 1.25rem; line-height: 1.6; color: #ccc; margin-bottom: 2.5rem; font-family: 'Inter', sans-serif;">
-      I design and build pixel-perfect, responsive digital interfaces. Like a Rubik's cube, I align every complex component to create a flawless user experience.
-    </p>
+  <!-- Custom Keyframes for Name Animation -->
+  <style>
+    @keyframes textFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    @keyframes textGlow {
+      0% { text-shadow: 0 0 10px rgba(124,92,252,0.5); }
+      100% { text-shadow: 0 0 30px rgba(0,229,255,0.8); }
+    }
+  </style>
 
-    <div class="hero-btns" style="display: flex; gap: 1rem;">
-      <a href="#projects" class="btn-primary" style="padding: 1rem 2rem; border-radius: 50px; background: linear-gradient(135deg, var(--c-cyan), var(--c-blue)); border: none; color: white; display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; font-weight: 600;">
-        <i data-lucide="arrow-up-right"></i>
-        View Work
-      </a>
-      <a href="#contact" class="btn-outline" style="padding: 1rem 2rem; border-radius: 50px; border: 2px solid rgba(255,255,255,0.2); color: white; text-decoration: none; font-weight: 600; transition: border-color 0.3s ease;">
-        Get in Touch
-      </a>
+  <!-- Main Container exactly like the image split -->
+  <div style="position: relative; z-index: 10; width: 90%; max-width: 1200px; display: flex; justify-content: space-between; align-items: center; margin-top: 4rem;">
+    
+    <!-- Left Text Block -->
+    <div style="max-width: 500px;">
+      <!-- Increased size to 5.5rem and added animation -->
+      <h1 style="font-family: 'Inter', sans-serif; font-size: 5.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 1rem; color: #fff; animation: textFloat 4s ease-in-out infinite;">
+        I'm <span style="color: #7c5cfc; animation: textGlow 2s alternate infinite;">Teja</span><br>
+        <span style="color: #00e5ff; animation: textGlow 3s alternate infinite; animation-delay: 1s;">Portfolio</span>
+      </h1>
+      <h2 style="font-family: 'Inter', sans-serif; font-size: 1.3rem; font-weight: 400; color: #8b92b2; margin-bottom: 1.5rem;">
+        Full Stack Developer
+      </h2>
+      <p style="font-family: 'Inter', sans-serif; font-size: 0.95rem; color: #6d7593; line-height: 1.6; margin-bottom: 2.5rem; max-width: 400px;">
+        Passionate about building responsive web applications with modern technologies — one piece at a time.
+      </p>
+
+      <div style="display: flex; gap: 1rem;">
+        <a href="#contact" style="padding: 0.8rem 1.8rem; border-radius: 50px; background: linear-gradient(90deg, #7c5cfc, #00e5ff); color: #fff; text-decoration: none; font-size: 0.9rem; font-weight: 600; border: none; box-shadow: 0 4px 15px rgba(0,229,255,0.3);">
+          Get In Touch
+        </a>
+        <a href="#projects" style="padding: 0.8rem 1.8rem; border-radius: 50px; background: transparent; border: 1px solid #00e5ff; color: #00e5ff; text-decoration: none; font-size: 0.9rem; font-weight: 600;">
+          View Projects
+        </a>
+      </div>
+    </div>
+
+    <!-- Right 3D Area / Cube Container -->
+    <div style="position: relative; width: 500px; height: 500px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+      <!-- Three.js Canvas specifically constrained here -->
+      <canvas id="three-canvas" style="width: 100%; height: 100%; pointer-events: auto;"></canvas>
+      <div style="position: absolute; bottom: 20px; font-family: 'Inter', sans-serif; font-size: 0.7rem; letter-spacing: 2px; color: #4a5568; text-transform: uppercase;">
+        Drag To Rotate
+      </div>
     </div>
   </div>
 
-  <div class="hero-scroll" style="position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 10px;">
-    <span style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: rgba(255,255,255,0.5);">Explore</span>
-    <div class="mouse-icon" style="width: 24px; height: 36px; border: 2px solid rgba(255,255,255,0.3); border-radius: 12px; position: relative;">
-      <div class="wheel" style="width: 4px; height: 8px; background: rgba(255,255,255,0.5); border-radius: 2px; position: absolute; left: 8px; top: 6px; animation: scrollMouse 1.5s infinite;"></div>
-    </div>
+  <!-- Bottom Chevron -->
+  <div style="position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 10;">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
   </div>
 </section>
 
