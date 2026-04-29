@@ -104,8 +104,8 @@
   }
 
   // Interactive Rotation State
-  let targetRotationX = Math.PI / 6;
-  let targetRotationY = Math.PI / 4;
+  let targetRotationX = Math.PI / 6;    // Slightly tilted to show the dark top face
+  let targetRotationY = Math.PI / 3.2;  // Angled heavily towards the blue face (matches right-heavy view in image)
   let isDragging = false;
   let previousMousePosition = { x: 0, y: 0 };
 
