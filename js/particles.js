@@ -1,73 +1,83 @@
 /* ============================================================
-   particles.js — Floating particle network canvas overlay
+   particles.js — Neural Mesh Background
    ============================================================ */
 
 (function () {
-  const c = document.getElementById('particles');
-  if (!c) return;
-  const ctx = c.getContext('2d');
+  const canvas = document.getElementById('particles');
+  if (!canvas) return;
 
-  let W = c.width  = window.innerWidth;
-  let H = c.height = window.innerHeight;
+  const ctx = canvas.getContext('2d');
+  let width, height;
+  let particles = [];
+  const particleCount = 100;
+  const connectionDistance = 150;
+  const mouseDistance = 200;
 
-  window.addEventListener('resize', () => {
-    W = c.width  = window.innerWidth;
-    H = c.height = window.innerHeight;
+  let mouse = { x: null, y: null };
+
+  window.addEventListener('mousemove', (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
   });
 
-  let mouseX = -1000, mouseY = -1000;
-  window.addEventListener('mousemove', e => {
-    mouseX = e.clientX; mouseY = e.clientY;
-  });
+  function init() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+    particles = [];
 
-  const COUNT = 55;
-  const particles = Array.from({ length: COUNT }, () => ({
-    x:     Math.random() * W,
-    y:     Math.random() * H,
-    vx:    (Math.random() - 0.5) * 0.3,
-    vy:    (Math.random() - 0.5) * 0.3,
-    r:     Math.random() * 1.8 + 0.4,
-    color: Math.random() > 0.5 ? 'rgba(124,92,252,' : 'rgba(0,229,255,',
-  }));
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        size: Math.random() * 2 + 1
+      });
+    }
+  }
 
   function draw() {
-    ctx.clearRect(0, 0, W, H);
+    ctx.clearRect(0, 0, width, height);
 
-    // Draw dots
-    particles.forEach(p => {
-      // Repulsion
-      const mdx = p.x - mouseX;
-      const mdy = p.y - mouseY;
-      const md  = Math.sqrt(mdx * mdx + mdy * mdy);
-      if (md < 120) {
-        p.x += (mdx / md) * 1.5;
-        p.y += (mdy / md) * 1.5;
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if (p.x < 0 || p.x > width) p.vx *= -1;
+      if (p.y < 0 || p.y > height) p.vy *= -1;
+
+      // Mouse attraction/repulsion
+      if (mouse.x !== null) {
+        const dx = mouse.x - p.x;
+        const dy = mouse.y - p.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < mouseDistance) {
+          const force = (mouseDistance - dist) / mouseDistance;
+          p.x -= dx * force * 0.02;
+          p.y -= dy * force * 0.02;
+        }
       }
 
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < 0) p.x = W;
-      if (p.x > W) p.x = 0;
-      if (p.y < 0) p.y = H;
-      if (p.y > H) p.y = 0;
-
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = p.color + '0.7)';
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(124, 92, 252, 0.5)';
       ctx.fill();
-    });
 
-    // Draw proximity lines
-    for (let i = 0; i < particles.length; i++) {
+      // Connections
       for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const d  = Math.sqrt(dx * dx + dy * dy);
-        if (d < 110) {
+        const p2 = particles[j];
+        const dx = p.x - p2.x;
+        const dy = p.y - p2.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < connectionDistance) {
           ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(124,92,252,${0.1 * (1 - d / 110)})`;
-          ctx.lineWidth   = 0.5;
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(p2.x, p2.y);
+          const opacity = (1 - dist / connectionDistance) * 0.3;
+          ctx.strokeStyle = `rgba(0, 229, 255, ${opacity})`;
+          ctx.lineWidth = 0.5;
           ctx.stroke();
         }
       }
@@ -76,5 +86,8 @@
     requestAnimationFrame(draw);
   }
 
+  window.addEventListener('resize', init);
+  init();
   draw();
+
 })();

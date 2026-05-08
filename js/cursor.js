@@ -1,34 +1,54 @@
 /* ============================================================
-   cursor.js — Custom animated dual-layer cursor
+   cursor.js — Precision Ring Cursor
    ============================================================ */
 
-const cursor = document.getElementById('cursor');
-const shadow = document.getElementById('cursor-shadow');
+document.addEventListener('DOMContentLoaded', () => {
+    const dot = document.getElementById('cursor');
+    const ring = document.getElementById('cursor-ring');
+    const shadow = document.getElementById('cursor-shadow');
 
-let mx = 0, my = 0; // Mouse Pos
-let cx = 0, cy = 0; // Cursor Pos
-let sx = 0, sy = 0; // Shadow Pos
+    if (!dot || !ring) return;
 
-document.addEventListener('mousemove', e => {
-  mx = e.clientX;
-  my = e.clientY;
+    let mouseX = 0, mouseY = 0;
+    let dotX = 0, dotY = 0;
+    let ringX = 0, ringY = 0;
+
+    window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    function animate() {
+        // Precise dot follows instantly
+        dotX += (mouseX - dotX) * 0.3;
+        dotY += (mouseY - dotY) * 0.3;
+        dot.style.transform = `translate(${dotX}px, ${dotY}px)`;
+
+        // Lagging ring for smoothness
+        ringX += (mouseX - ringX) * 0.15;
+        ringY += (mouseY - ringY) * 0.15;
+        ring.style.transform = `translate(${ringX - 25}px, ${ringY - 25}px)`; // Adjusted for ring size
+
+        // Shadow follows mouse directly
+        if (shadow) {
+            shadow.style.transform = `translate(${mouseX - 75}px, ${mouseY - 75}px)`;
+        }
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    // Interaction states
+    const interactiveElements = document.querySelectorAll('a, button, .project-card, .pill');
+    interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            ring.classList.add('active');
+            dot.classList.add('active');
+        });
+        el.addEventListener('mouseleave', () => {
+            ring.classList.remove('active');
+            dot.classList.remove('active');
+        });
+    });
 });
-
-function lerp(a, b, n) { return (1 - n) * a + n * b; }
-
-function updateCursor() {
-  cx = lerp(cx, mx, 0.2);
-  cy = lerp(cy, my, 0.2);
-  
-  // Shadow follows with more lag
-  sx = lerp(sx, mx, 0.08);
-  sy = lerp(sy, my, 0.08);
-
-  cursor.style.transform = `translate3d(${cx}px, ${cy}px, 0) translate(-50%, -50%)`;
-  if (shadow) {
-    shadow.style.transform = `translate3d(${sx}px, ${sy}px, 0) translate(-50%, -50%)`;
-  }
-
-  requestAnimationFrame(updateCursor);
-}
-updateCursor();

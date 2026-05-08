@@ -73,12 +73,11 @@
     <!-- Left Text Block -->
     <div style="max-width: 500px;">
       <!-- Increased size to 5.5rem and added animation -->
-      <h1 style="font-family: 'Inter', sans-serif; font-size: 5.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 1rem; color: #fff; animation: textFloat 4s ease-in-out infinite;">
-        I'm <span style="color: #7c5cfc; animation: textGlow 2s alternate infinite;">Teja</span><br>
-        <span style="color: #00e5ff; animation: textGlow 3s alternate infinite; animation-delay: 1s;">Portfolio</span>
+      <h1 style="font-family: 'Syne', sans-serif; font-size: 5.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 1rem; color: #fff; animation: textFloat 4s ease-in-out infinite;">
+        I am <span style="color: #7c5cfc; animation: textGlow 2s alternate infinite;">Teja</span>
       </h1>
-      <h2 style="font-family: 'Inter', sans-serif; font-size: 1.3rem; font-weight: 400; color: #8b92b2; margin-bottom: 1.5rem;">
-        Full Stack Developer
+      <h2 id="role-rotator" style="font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; font-weight: 400; color: #8b92b2; margin-bottom: 1.5rem; min-height: 2.5rem;">
+        <!-- Roles will be injected here -->
       </h2>
       <p style="font-family: 'Inter', sans-serif; font-size: 0.95rem; color: #6d7593; line-height: 1.6; margin-bottom: 2.5rem; max-width: 400px;">
         Passionate about building responsive web applications with modern technologies — one piece at a time.
@@ -216,11 +215,7 @@
 
       <!-- Skill pills (right column) with Bucket Spawner -->
       <div class="skills-right" style="position: relative;">
-        <!-- The Bucket -->
-        <div class="skill-bucket" id="skillBucket">
-          <div class="bucket-mouth"></div>
-          <p>Skills Spawner</p>
-        </div>
+        <!-- Spawner removed, standard grid layout will be used -->
         
         <div id="spawnerContainer" class="pill-spawner-grid">
           <div class="skill-pill-group reveal reveal-d1">
@@ -672,57 +667,7 @@
   <div class="footer-credit">Built for humans. Powered by curiosity.</div>
 </footer>
 
-<!-- ── EDIT MODE UI ───────────────────────────────────────────── -->
-<button id="edit-toggle">
-  <i data-lucide="edit-3"></i> Enable Edit Mode
-</button>
 
-<div class="modal-overlay" id="techModal">
-  <div class="edit-modal">
-    <button class="modal-close" id="closeTechModal">&times;</button>
-    <div id="techContent">
-      <h3 id="techTitle">Technology</h3>
-      <div class="form-group">
-        <label>Experience Level</label>
-        <p id="techLevel" style="color: var(--c-purple); font-weight: 700;"></p>
-      </div>
-      <div class="form-group">
-        <label>Featured Projects</label>
-        <p id="techProjects" style="font-size: .9rem; line-height: 1.6;"></p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal-overlay" id="editModal">
-  <div class="edit-modal">
-    <button class="modal-close" id="closeModal">&times;</button>
-    <h3 id="modalTitle">Edit Element</h3>
-    
-    <div id="textEditor" style="display: none;">
-      <div class="form-group">
-        <label>Content</label>
-        <textarea id="editContent"></textarea>
-      </div>
-    </div>
-
-    <div id="imageEditor" style="display: none;">
-      <div class="form-group">
-        <label>Upload New Image (Local Only)</label>
-        <input type="file" id="fileInput" accept="image/*">
-        <p style="font-size: .7rem; color: var(--c-muted); margin-top: .5rem;">
-          Note: This will update the element in your browser. Use Chrome/Edge to save permanently via File System API.
-        </p>
-      </div>
-      <div class="form-group">
-        <label>Or Image Path</label>
-        <input type="text" id="imgPath" placeholder="assets/new-image.png">
-      </div>
-    </div>
-
-    <button class="form-submit" id="saveBtn">Save Changes</button>
-  </div>
-</div>
 
 <!-- ── SCRIPTS (load order matters) ──────────────────────── -->
 <script src="js/cursor.js"></script>
@@ -730,7 +675,8 @@
 <script src="js/three-scene.js"></script>
 <script src="js/particles.js"></script>
 <script src="js/animations.js"></script>
-<script src="js/edit-mode.js"></script>
+
+<script src="js/typewriter.js"></script>
 <script src="js/form.js"></script>
 
 <script>
